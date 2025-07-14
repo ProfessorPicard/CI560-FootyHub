@@ -17,21 +17,27 @@
         app:title="Favourites Settings">
 
         <SwitchPreference
+            app:title="Show Team Details"
+            app:key="showDetails"
+            app:summary="Show team details on home screen"
+            app:defaultValue="true" />
+
+        <SwitchPreference
             app:title="Show Previous Result"
             app:key="showPrev"
-            app:summary="Show previous result on favourites screen (if previous result exists)"
+            app:summary="Show previous result on home screen (if previous result exists)"
             app:defaultValue="true" />
 
         <SwitchPreference
             app:title="Show Next Fixture"
             app:key="showNext"
-            app:summary="Show next fixture on favourites screen (if next fixture exists)"
+            app:summary="Show next fixture on home screen (if next fixture exists)"
             app:defaultValue="true" />
 
         <SwitchPreference
             app:title="Show News Articles"
             app:key="showNews"
-            app:summary="Show news articles on favourites screen"
+            app:summary="Show news articles on home screen"
             app:defaultValue="true" />
 
         <Preference
