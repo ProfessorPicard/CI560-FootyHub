@@ -1,15 +1,12 @@
 package uk.phsh.footyhub.rest.tasks;
 
 import android.util.Log;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-
 import java.io.File;
 import java.util.concurrent.Callable;
-
 import okhttp3.Cache;
 import okhttp3.Headers;
 import okhttp3.OkHttpClient;
@@ -28,7 +25,7 @@ public abstract class BaseTask<T> implements Callable<RestResponse>, I_RestRespo
 
     public static final String baseUrl = "https://api.football-data.org/v4/";
     private static OkHttpClient client;
-    private I_TaskCallback<T> _callback;
+    private final I_TaskCallback<T> _callback;
     private final Gson _gson;
 
     /**

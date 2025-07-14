@@ -1,7 +1,6 @@
 package uk.phsh.footyhub.fragments;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,16 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
-
 import androidx.preference.PreferenceManager;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-
 import java.util.ArrayList;
-
 import uk.phsh.footyhub.R;
 import uk.phsh.footyhub.adapters.TeamGridViewAdapter;
 import uk.phsh.footyhub.interfaces.I_FragmentCallback;

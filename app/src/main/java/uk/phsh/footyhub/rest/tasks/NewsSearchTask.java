@@ -3,10 +3,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
-import java.io.File;
 import java.util.ArrayList;
-
 import uk.phsh.footyhub.helpers.UtilityHelper;
 import uk.phsh.footyhub.rest.interfaces.I_TaskCallback;
 import uk.phsh.footyhub.rest.models.NewsArticle;

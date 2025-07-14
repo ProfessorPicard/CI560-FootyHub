@@ -1,12 +1,8 @@
 package uk.phsh.footyhub.rest.tasks;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-
-import java.io.File;
-
 import uk.phsh.footyhub.rest.enums.LeagueEnum;
 import uk.phsh.footyhub.rest.interfaces.I_TaskCallback;
 import uk.phsh.footyhub.rest.models.LeagueInfo;

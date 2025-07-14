@@ -6,7 +6,6 @@ import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-
 import uk.phsh.footyhub.enums.DateTimeType;
 
 /**

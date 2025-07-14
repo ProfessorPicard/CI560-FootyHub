@@ -2,9 +2,6 @@ package uk.phsh.footyhub.rest.tasks;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-
-import java.io.File;
-
 import uk.phsh.footyhub.enums.DateTimeType;
 import uk.phsh.footyhub.helpers.UtilityHelper;
 import uk.phsh.footyhub.rest.enums.FixtureType;

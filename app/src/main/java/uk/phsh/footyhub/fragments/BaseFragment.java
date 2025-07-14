@@ -1,10 +1,8 @@
 package uk.phsh.footyhub.fragments;
 
 import android.content.Context;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-
 import uk.phsh.footyhub.interfaces.I_FragmentCallback;
 
 public abstract class BaseFragment extends Fragment {

@@ -1,9 +1,6 @@
 package uk.phsh.footyhub.rest.tasks;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-
 import uk.phsh.footyhub.rest.interfaces.I_TaskCallback;
 import uk.phsh.footyhub.rest.models.RestResponse;
 import uk.phsh.footyhub.rest.models.Team;

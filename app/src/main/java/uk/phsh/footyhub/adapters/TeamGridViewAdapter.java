@@ -7,13 +7,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
-
 import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
-
 import uk.phsh.footyhub.R;
 import uk.phsh.footyhub.rest.models.Team;
 

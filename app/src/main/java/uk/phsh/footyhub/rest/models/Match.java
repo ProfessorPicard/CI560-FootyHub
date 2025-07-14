@@ -18,5 +18,4 @@ public class Match {
     public Score fullTime;
     public String matchDate;
     public String matchTime;
-    public String venue;
 }

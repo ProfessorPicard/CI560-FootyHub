@@ -38,7 +38,7 @@
                     android:id="@+id/venueHeaderTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="25dp"
-                    android:text="Venue:"
+                    android:text="@string/venueHeader"
                     android:textColor="@color/primary_on"
                     android:textStyle="bold"
                     android:fontFamily="@font/roboto_bold"
@@ -51,7 +51,6 @@
                     android:id="@+id/venueTxt"
                     android:layout_width="match_parent"
                     android:layout_height="25dp"
-                    android:text="Anfield"
                     android:textColor="@color/primary_on"
                     android:fontFamily="@font/roboto_light"
                     android:layout_alignParentTop="true"
@@ -63,7 +62,6 @@
                     android:id="@+id/addressTxt"
                     android:layout_width="match_parent"
                     android:layout_height="25dp"
-                    android:text="Anfield"
                     android:textColor="@color/primary_on"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
@@ -74,7 +72,7 @@
                     android:id="@+id/foundedHeaderTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="25dp"
-                    android:text="Founded:"
+                    android:text="@string/foundedHeader"
                     android:textColor="@color/primary_on"
                     android:fontFamily="@font/roboto_bold"
                     android:textStyle="bold"
@@ -87,7 +85,6 @@
                     android:id="@+id/foundedTxt"
                     android:layout_width="match_parent"
                     android:layout_height="25dp"
-                    android:text="1892"
                     android:textColor="@color/primary_on"
                     android:fontFamily="@font/roboto_light"
                     android:layout_alignParentEnd="true"
@@ -99,7 +96,7 @@
                     android:id="@+id/coachHeaderTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="25dp"
-                    android:text="Coach:"
+                    android:text="@string/coachHeader"
                     android:textColor="@color/primary_on"
                     android:textStyle="bold"
                     android:fontFamily="@font/roboto_bold"
@@ -112,7 +109,6 @@
                     android:id="@+id/coachTxt"
                     android:layout_width="match_parent"
                     android:layout_height="25dp"
-                    android:text="Arne Slot"
                     android:textColor="@color/primary_on"
                     android:fontFamily="@font/roboto_light"
                     android:layout_alignParentEnd="true"
@@ -156,7 +152,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Next Fixture"
+                    android:text="@string/nextFixtureHeader"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:gravity="center_vertical"
@@ -167,7 +163,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:textSize="18sp"
-                    android:text="LIV v BOU"
                     android:gravity="center_vertical" />
 
             </LinearLayout>
@@ -199,16 +194,14 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:textSize="12sp"
-                        android:id="@+id/nextFixtureDate"
-                        android:text="17/08/2025" />
+                        android:id="@+id/nextFixtureDate" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:textSize="12sp"
-                        android:id="@+id/nextFixtureTime"
-                        android:text="7pm" />
+                        android:id="@+id/nextFixtureTime" />
 
                 </LinearLayout>
 
@@ -258,7 +251,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Previous Result"
+                    android:text="@string/prevFixtureHeader"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:gravity="center_vertical"
@@ -268,7 +261,6 @@
                     android:id="@+id/prevFixtureTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="LIV v CRY"
                     android:textSize="18sp"
                     android:gravity="center_vertical" />
 
@@ -291,7 +283,6 @@
                     android:layout_height="90dp"
                     android:gravity="center_vertical"
                     android:id="@+id/prevFixtureHomeScore"
-                    android:text="1"
                     android:textSize="20sp"
                     android:layout_alignParentTop="true"
                     android:layout_toEndOf="@+id/prevFixtureHomeImg" />
@@ -300,31 +291,31 @@
                     android:layout_width="match_parent"
                     android:layout_height="90dp"
                     android:orientation="vertical"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:layout_toEndOf="@+id/prevFixtureHomeScore"
+                    android:layout_toStartOf="@+id/prevFixtureAwayScore">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:textSize="12sp"
-                        android:id="@+id/prevFixtureDate"
-                        android:text="17/08/2025" />
+                        android:id="@+id/prevFixtureDate" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:textSize="12sp"
-                        android:id="@+id/prevFixtureTime"
-                        android:text="7pm" />
+                        android:id="@+id/prevFixtureTime" />
 
                 </LinearLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="90dp"
+                    android:maxWidth="50dp"
                     android:gravity="center"
-                    android:text="1"
                     android:textSize="20sp"
                     android:id="@+id/prevFixtureAwayScore"
                     android:layout_toStartOf="@+id/prevFixtureAwayImg" />

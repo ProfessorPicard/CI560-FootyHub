@@ -2,11 +2,9 @@ package uk.phsh.footyhub.rest;
 
 import android.os.Handler;
 import android.os.Looper;
-
 import java.io.File;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
-import uk.phsh.footyhub.rest.interfaces.I_RestResponse;
 import uk.phsh.footyhub.rest.models.RestResponse;
 import uk.phsh.footyhub.rest.tasks.BaseTask;
 
@@ -15,7 +13,7 @@ public class RestManager {
     private final Executor _executor = Executors.newSingleThreadExecutor();
     private final Handler _handler = new Handler(Looper.getMainLooper());
     private long rateLimitTimestamp = 0;
-    private File _cacheDir;
+    private final File _cacheDir;
 
     private static RestManager _instance;
 

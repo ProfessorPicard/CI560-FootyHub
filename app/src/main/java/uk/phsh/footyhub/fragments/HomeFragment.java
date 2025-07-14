@@ -1,6 +1,5 @@
 package uk.phsh.footyhub.fragments;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,12 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.cardview.widget.CardView;
 import androidx.preference.PreferenceManager;
-
 import com.squareup.picasso.Picasso;
-
+import java.util.Locale;
 import uk.phsh.footyhub.R;
 import uk.phsh.footyhub.interfaces.I_FragmentCallback;
 import uk.phsh.footyhub.rest.RestManager;
@@ -95,7 +92,6 @@ public class HomeFragment extends BaseFragment {
         prevFixtureHomeImg = v.findViewById(R.id.prevFixtureHomeImg);
         prevFixtureAwayImg = v.findViewById(R.id.prevFixtureAwayImg);
 
-
         return v;
     }
 
@@ -111,16 +107,15 @@ public class HomeFragment extends BaseFragment {
         if(teamID != -1) {
 
             if (prefs.getBoolean("showDetails", false)) {
-                I_TaskCallback<Team> teamCallback = new I_TaskCallback<Team>() {
+                I_TaskCallback<Team> teamCallback = new I_TaskCallback<>() {
                     @Override
                     public void onSuccess(Team value) {
                         teamDetailsContainer.setVisibility(View.VISIBLE);
                         venueTxt.setText(value.venue);
                         addressTxt.setText(value.address);
-                        foundedTxt.setText("" + value.founded);
+                        foundedTxt.setText(String.format(Locale.UK, "%d", value.founded));
                         coachTxt.setText(value.coach);
                         Picasso.get().load(value.crest).into(teamDetailsImg);
-
                     }
 
                     @Override
@@ -139,11 +134,11 @@ public class HomeFragment extends BaseFragment {
             }
 
             if (prefs.getBoolean("showNext", false)) {
-                I_TaskCallback<Match> nextCallback = new I_TaskCallback<Match>() {
+                I_TaskCallback<Match> nextCallback = new I_TaskCallback<>() {
                     @Override
                     public void onSuccess(Match value) {
                         nextFixtureContainer.setVisibility(View.VISIBLE);
-                        nextFixtureTitle.setText(value.homeTeam.tla + " v " + value.awayTeam.tla);
+                        nextFixtureTitle.setText(getString(R.string.nextFixtureTitle,value.homeTeam.tla ,value.awayTeam.tla));
                         Picasso.get().load(value.homeTeam.crest).into(nextFixtureHomeImg);
                         Picasso.get().load(value.awayTeam.crest).into(nextFixtureAwayImg);
 
@@ -167,16 +162,16 @@ public class HomeFragment extends BaseFragment {
             }
 
             if (prefs.getBoolean("showPrev", false)) {
-                I_TaskCallback<Match> prevCallback = new I_TaskCallback<Match>() {
+                I_TaskCallback<Match> prevCallback = new I_TaskCallback<>() {
                     @Override
                     public void onSuccess(Match value) {
                         prevFixtureContainer.setVisibility(View.VISIBLE);
-                        prevFixtureTitle.setText(value.homeTeam.tla + " v " + value.awayTeam.tla);
+                        prevFixtureTitle.setText(String.format(String.valueOf(R.string.prevFixtureTitle), value.homeTeam.tla ,value.awayTeam.tla));
                         Picasso.get().load(value.homeTeam.crest).into(prevFixtureHomeImg);
                         Picasso.get().load(value.awayTeam.crest).into(prevFixtureAwayImg);
 
-                        prevFixtureHomeScore.setText("" + value.fullTime.homeScore);
-                        prevFixtureAwayScore.setText("" + value.fullTime.awayScore);
+                        prevFixtureHomeScore.setText(String.format(Locale.UK, "%d", value.fullTime.homeScore));
+                        prevFixtureAwayScore.setText(String.format(Locale.UK,"%d", value.fullTime.awayScore));
 
                         prevFixtureDate.setText(value.matchDate);
                         prevFixtureTime.setText(value.matchTime);
@@ -197,11 +192,11 @@ public class HomeFragment extends BaseFragment {
                 prevFixtureContainer.setVisibility(View.GONE);
             }
 
-            if (prefs.getBoolean("showNews", false)) {
-
-            } else {
-
-            }
+//            if (prefs.getBoolean("showNews", false)) {
+//                // Do Stuff
+//            } else {
+//                // Dont Do Stuff
+//            }
         }
 
     }

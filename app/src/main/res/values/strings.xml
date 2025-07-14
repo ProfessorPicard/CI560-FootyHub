@@ -17,6 +17,16 @@
     <string name="teamLogoContent">Team logo</string>
     <string name="selectFavTeam">Set %1$s as your favourite team?</string>
 
+    <!-- Home Fragment Strings -->
+    <string name="venueHeader">Venue</string>
+    <string name="foundedHeader">Founded</string>
+    <string name="coachHeader">Coach</string>
+    <string name="nextFixtureHeader">Next Fixture</string>
+    <string name="prevFixtureHeader">Previous Result</string>
+    <string name="newsHeader">%1$s News</string>
+    <string name="nextFixtureTitle">%1$s v %2$s</string>
+    <string name="prevFixtureTitle">%1$s v %2$s</string>
+
     <!-- Drawer Menu Strings -->
     <string name="home_drawer_menu">Home</string>
     <string name="change_favourite_drawer_menu">Change Favourite Team</string>
