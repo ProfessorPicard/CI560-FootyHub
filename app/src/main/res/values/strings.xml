@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">FootyHub</string>
+    <string name="drawer_open">Nav Drawer Open</string>
+    <string name="drawer_closed">Nav Drawer Closed</string>
+    <string name="nav_icon_default_content">Navigation Icon</string>
+
+    <!-- Fragment Strings -->
+    <string name="home_fragment_actionbar">Home</string>
+    <string name="select_fragment_actionbar">Select a favourite team</string>
+    <string name="news_fragment_actionbar">Team News</string>
+    <string name="fixture_fragment_actionbar">Fixtures / Results</string>
+    <string name="standings_fragment_actionbar">Standings</string>
+    <string name="settings_fragment_actionbar">Settings</string>
+
+    <!-- Drawer Menu Strings -->
+    <string name="home_drawer_menu">Home</string>
+    <string name="change_favourite_drawer_menu">Change Favourite Team</string>
+    <string name="team_news_drawer_menu">Team News</string>
+    <string name="fixtures_drawer_menu">Fixtures / Results</string>
+    <string name="standings_drawer_menu">Standings</string>
+    <string name="settings_drawer_menu">Settings</string>
+
+</resources>
