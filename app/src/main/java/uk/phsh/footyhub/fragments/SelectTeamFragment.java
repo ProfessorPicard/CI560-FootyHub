@@ -144,4 +144,9 @@ public class SelectTeamFragment extends BaseFragment implements I_TaskCallback<A
     public void onRateLimitReached(int secondsRemaining) {
 
     }
+
+    @Override
+    public void onError(String message) {
+
+    }
 }

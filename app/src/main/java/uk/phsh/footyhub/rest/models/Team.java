@@ -14,6 +14,7 @@ public class Team {
     public String address;
     public int founded;
     public String venue;
+    public String coach;
 
     public Team() { }
 
@@ -25,7 +26,7 @@ public class Team {
      * @param crest Team logo as String
      */
     public Team(int id, String name, String shortName, String tla, String crest,
-                String address, int founded, String venue) {
+                String address, int founded, String venue, String coach) {
         this.id = id;
         this.name = name;
         this.shortName = shortName;
@@ -34,6 +35,7 @@ public class Team {
         this.address = address;
         this.founded = founded;
         this.venue = venue;
+        this.coach = coach;
     }
 
 }

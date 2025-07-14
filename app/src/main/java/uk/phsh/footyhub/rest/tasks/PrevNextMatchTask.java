@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 
 import java.io.File;
 
+import uk.phsh.footyhub.enums.DateTimeType;
 import uk.phsh.footyhub.helpers.UtilityHelper;
 import uk.phsh.footyhub.rest.enums.FixtureType;
 import uk.phsh.footyhub.rest.interfaces.I_TaskCallback;
@@ -50,7 +51,10 @@ public class PrevNextMatchTask extends BaseTask<Match> {
 
     @Override
     public void onSuccess(RestResponse response) {
-        getCallback().onSuccess(parseMatch(response.getResponseBody(), _type));
+        if(parseMatch(response.getResponseBody(), _type) != null)
+            getCallback().onSuccess(parseMatch(response.getResponseBody(), _type));
+        else
+            getCallback().onError("No matches found");
     }
 
     /**
@@ -71,7 +75,8 @@ public class PrevNextMatchTask extends BaseTask<Match> {
 
             m.matchID = matchObject.get("id").getAsInt();
 
-            m.matchDate = UtilityHelper.getInstance().DateTimeString(matchObject.get("utcDate").getAsString());
+            m.matchDate = UtilityHelper.getInstance().DateTimeString(matchObject.get("utcDate").getAsString(), DateTimeType.DATE);
+            m.matchTime = UtilityHelper.getInstance().DateTimeString(matchObject.get("utcDate").getAsString(), DateTimeType.TIME);
 
             m.matchType = type;
 
@@ -90,7 +95,7 @@ public class PrevNextMatchTask extends BaseTask<Match> {
                 m.fullTime = fullScore;
             }
         } else {
-            m = null;
+            return null;
         }
         return m;
     }

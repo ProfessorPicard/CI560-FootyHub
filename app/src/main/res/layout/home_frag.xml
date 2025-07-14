@@ -1,6 +1,347 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.cardview.widget.CardView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:id="@+id/teamDetailsContainer"
+        android:visibility="gone"
+        app:cardUseCompatPadding="true"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:background="@color/primary_variant"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/teamDetailsImg"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/teamLogoContent"
+                android:scaleType="fitXY"
+                android:adjustViewBounds="true"
+                android:layout_marginEnd="10dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/venueHeaderTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:text="Venue:"
+                    android:textColor="@color/primary_on"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/roboto_bold"
+                    android:gravity="center_vertical|start"
+                    android:layout_marginEnd="20dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true" />
+
+                <TextView
+                    android:id="@+id/venueTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:text="Anfield"
+                    android:textColor="@color/primary_on"
+                    android:fontFamily="@font/roboto_light"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_toEndOf="@+id/venueHeaderTxt"
+                    android:gravity="center_vertical|start" />
+
+                <TextView
+                    android:id="@+id/addressTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:text="Anfield"
+                    android:textColor="@color/primary_on"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_below="@+id/venueHeaderTxt"
+                    android:gravity="center_vertical|start" />
+
+                <TextView
+                    android:id="@+id/foundedHeaderTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:text="Founded:"
+                    android:textColor="@color/primary_on"
+                    android:fontFamily="@font/roboto_bold"
+                    android:textStyle="bold"
+                    android:gravity="center_vertical|start"
+                    android:layout_marginEnd="10dp"
+                    android:layout_below="@+id/addressTxt"
+                    android:layout_alignParentStart="true" />
+
+                <TextView
+                    android:id="@+id/foundedTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:text="1892"
+                    android:textColor="@color/primary_on"
+                    android:fontFamily="@font/roboto_light"
+                    android:layout_alignParentEnd="true"
+                    android:layout_toEndOf="@+id/foundedHeaderTxt"
+                    android:layout_below="@+id/addressTxt"
+                    android:gravity="center_vertical|start" />
+
+                <TextView
+                    android:id="@+id/coachHeaderTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:text="Coach:"
+                    android:textColor="@color/primary_on"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/roboto_bold"
+                    android:gravity="center_vertical|start"
+                    android:layout_marginEnd="10dp"
+                    android:layout_below="@+id/foundedHeaderTxt"
+                    android:layout_alignParentStart="true" />
+
+                <TextView
+                    android:id="@+id/coachTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:text="Arne Slot"
+                    android:textColor="@color/primary_on"
+                    android:fontFamily="@font/roboto_light"
+                    android:layout_alignParentEnd="true"
+                    android:layout_toEndOf="@+id/coachHeaderTxt"
+                    android:layout_below="@+id/foundedHeaderTxt"
+                    android:gravity="center_vertical|start" />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:id="@+id/nextFixtureContainer"
+        android:layout_below="@+id/teamDetailsContainer"
+        android:background="@color/primary_variant"
+        android:visibility="gone"
+        app:cardUseCompatPadding="true"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:padding="10dp"
+            android:background="@color/primary_variant"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Next Fixture"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:gravity="center_vertical"
+                    android:layout_marginEnd="10dp"/>
+
+                <TextView
+                    android:id="@+id/nextFixtureTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textSize="18sp"
+                    android:text="LIV v BOU"
+                    android:gravity="center_vertical" />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="90dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="90dp"
+                    android:contentDescription="@string/teamLogoContent"
+                    android:id="@+id/nextFixtureHomeImg"
+                    android:scaleType="matrix"
+                    android:adjustViewBounds="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:orientation="vertical"
+                    android:layout_toEndOf="@+id/nextFixtureHomeImg"
+                    android:layout_toStartOf="@+id/nextFixtureAwayImg"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textSize="12sp"
+                        android:id="@+id/nextFixtureDate"
+                        android:text="17/08/2025" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textSize="12sp"
+                        android:id="@+id/nextFixtureTime"
+                        android:text="7pm" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="90dp"
+                    android:contentDescription="@string/teamLogoContent"
+                    android:id="@+id/nextFixtureAwayImg"
+                    android:scaleType="matrix"
+                    android:adjustViewBounds="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true" />
+
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:id="@+id/previousFixtureContainer"
+        android:layout_below="@+id/nextFixtureContainer"
+        android:background="@color/primary_variant"
+        android:visibility="gone"
+        app:cardUseCompatPadding="true"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:padding="10dp"
+            android:background="@color/primary_variant"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Previous Result"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:gravity="center_vertical"
+                    android:layout_marginEnd="10dp"/>
+
+                <TextView
+                    android:id="@+id/prevFixtureTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="LIV v CRY"
+                    android:textSize="18sp"
+                    android:gravity="center_vertical" />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="90dp">
+
+                <ImageView
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:contentDescription="@string/teamLogoContent"
+                    android:id="@+id/prevFixtureHomeImg"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="90dp"
+                    android:gravity="center_vertical"
+                    android:id="@+id/prevFixtureHomeScore"
+                    android:text="1"
+                    android:textSize="20sp"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@+id/prevFixtureHomeImg" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textSize="12sp"
+                        android:id="@+id/prevFixtureDate"
+                        android:text="17/08/2025" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textSize="12sp"
+                        android:id="@+id/prevFixtureTime"
+                        android:text="7pm" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="90dp"
+                    android:gravity="center"
+                    android:text="1"
+                    android:textSize="20sp"
+                    android:id="@+id/prevFixtureAwayScore"
+                    android:layout_toStartOf="@+id/prevFixtureAwayImg" />
+
+                <ImageView
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:contentDescription="@string/teamLogoContent"
+                    android:id="@+id/prevFixtureAwayImg"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true" />
+
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

@@ -7,6 +7,8 @@ import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
+import uk.phsh.footyhub.enums.DateTimeType;
+
 /**
  * Singleton helper class for general utilities
  * @author Peter Blackburn
@@ -31,16 +33,27 @@ public class UtilityHelper {
      * @param dateTimeStr UTC formatted datetime string from rest response
      * @return String Formatted date time string into MMMM dd YYYY hh:mm
      */
-    public String DateTimeString(String dateTimeStr) {
-        System.out.println(dateTimeStr);
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a");
+    public String DateTimeString(String dateTimeStr, DateTimeType type) {
+        DateTimeFormatter dtf = null;
+
+        switch (type) {
+            case DATE:
+                dtf = DateTimeFormatter.ofPattern("MMM dd yyyy");
+                break;
+            case TIME:
+                dtf = DateTimeFormatter.ofPattern("hh:mm a");
+                break;
+            case DATETIME:
+                dtf = DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a");
+                break;
+        }
+
         Instant instant = Instant.parse(dateTimeStr);
         ZoneId zoneId = ZoneId.of("UTC");
         ZonedDateTime dateTime = ZonedDateTime.ofInstant(instant, zoneId);
 
         return dateTime.format(dtf);
     }
-
 
     /**
      * Formats a given Epoch time string

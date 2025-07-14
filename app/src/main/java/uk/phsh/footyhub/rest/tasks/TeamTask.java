@@ -44,6 +44,9 @@ public class TeamTask extends BaseTask<Team> {
         team.founded = baseObject.get("founded").getAsInt();
         team.venue = baseObject.get("venue").getAsString();
 
+        JsonObject coachObject = baseObject.getAsJsonObject("coach");
+        team.coach = coachObject.get("name").getAsString();
+
         getCallback().onSuccess(team);
     }
 
