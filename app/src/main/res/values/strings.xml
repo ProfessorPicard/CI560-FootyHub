@@ -12,6 +12,11 @@
     <string name="standings_fragment_actionbar">Standings</string>
     <string name="settings_fragment_actionbar">Settings</string>
 
+    <!-- Team Choice Strings -->
+    <string name="selectFragHeader">Choose your favourite team</string>
+    <string name="teamLogoContent">Team logo</string>
+    <string name="selectFavTeam">Set %1$s as your favourite team?</string>
+
     <!-- Drawer Menu Strings -->
     <string name="home_drawer_menu">Home</string>
     <string name="change_favourite_drawer_menu">Change Favourite Team</string>
@@ -19,5 +24,12 @@
     <string name="fixtures_drawer_menu">Fixtures / Results</string>
     <string name="standings_drawer_menu">Standings</string>
     <string name="settings_drawer_menu">Settings</string>
+    <string name="selectedTeamImgContent">Your favourite teams logo</string>
+
+    <!-- Settings Strings -->
+    <string name="settingsFragHeader">Settings</string>
+    <string name="prefTeamNameSummary">Favourite Team Name: %1$s</string>
+    <string name="prefTeamLogoSummary">Favourite Team Logo: %1$s</string>
+    <string name="prefTeamIdSummary">Favourite Team ID: %1$d</string>
 
 </resources>

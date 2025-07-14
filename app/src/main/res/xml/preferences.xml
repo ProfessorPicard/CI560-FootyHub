@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        app:title="Theme Settings">
+
+        <CheckBoxPreference
+            app:title="Dark Mode"
+            app:key="darkMode"
+            app:summary="Enable / Disable Dark Mode"
+            app:defaultValue="false" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:title="Favourites Settings">
+
+        <SwitchPreference
+            app:title="Show Previous Result"
+            app:key="showPrev"
+            app:summary="Show previous result on favourites screen (if previous result exists)"
+            app:defaultValue="true" />
+
+        <SwitchPreference
+            app:title="Show Next Fixture"
+            app:key="showNext"
+            app:summary="Show next fixture on favourites screen (if next fixture exists)"
+            app:defaultValue="true" />
+
+        <SwitchPreference
+            app:title="Show News Articles"
+            app:key="showNews"
+            app:summary="Show news articles on favourites screen"
+            app:defaultValue="true" />
+
+        <Preference
+            app:title="Favourite Team ID"
+            app:key="favouriteTeamID" />
+
+        <Preference
+            app:title="Favourite Team Name"
+            app:key="favouriteTeamName"/>
+
+        <Preference
+            app:title="Favourite Team Logo"
+            app:key="favouriteTeamLogo" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

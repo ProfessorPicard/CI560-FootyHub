@@ -9,20 +9,20 @@ import uk.phsh.footyhub.interfaces.I_FragmentCallback;
 
 public abstract class BaseFragment extends Fragment {
 
-    protected final I_FragmentCallback _callBack;
-    protected final Context _context;
+    protected I_FragmentCallback _callBack = null;
 
     public abstract String getActionBarTitle();
 
-    public BaseFragment(I_FragmentCallback callBack, Context context) {
+    public BaseFragment() { }
+
+    public BaseFragment(I_FragmentCallback callBack) {
         this._callBack = callBack;
-        this._context = context;
     }
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if(_context != null)
+        if(_callBack != null)
             _callBack.changeActionbarTitle(getActionBarTitle());
     }
 
