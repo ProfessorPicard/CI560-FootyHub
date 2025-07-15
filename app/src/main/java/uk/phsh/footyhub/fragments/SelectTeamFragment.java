@@ -16,6 +16,7 @@ import com.google.gson.JsonParser;
 import java.util.ArrayList;
 import uk.phsh.footyhub.R;
 import uk.phsh.footyhub.adapters.TeamGridViewAdapter;
+import uk.phsh.footyhub.helpers.UtilityHelper;
 import uk.phsh.footyhub.interfaces.I_FragmentCallback;
 import uk.phsh.footyhub.rest.RestManager;
 import uk.phsh.footyhub.rest.enums.LeagueEnum;
@@ -97,8 +98,8 @@ public class SelectTeamFragment extends BaseFragment implements I_TaskCallback<A
 
         if(teamsStr.isEmpty()) {
             RestManager rm = RestManager.getInstance(requireActivity().getCacheDir());
-            rm.asyncTask(new LeagueTeamsTask(LeagueEnum.PREMIER_LEAGUE, this, getContext()));
-            rm.asyncTask(new LeagueTeamsTask(LeagueEnum.CHAMPIONSHIP, this, getContext()));
+            rm.asyncTask(new LeagueTeamsTask(LeagueEnum.PREMIER_LEAGUE, this));
+            rm.asyncTask(new LeagueTeamsTask(LeagueEnum.CHAMPIONSHIP, this));
         } else {
             Gson gson = new Gson();
             JsonElement element = JsonParser.parseString(teamsStr);
@@ -122,21 +123,26 @@ public class SelectTeamFragment extends BaseFragment implements I_TaskCallback<A
 
     @Override
     public void onSuccess(ArrayList<Team> value) {
-        availableTeams.addAll(value);
-        availableTeams.sort((t1, t2) -> {
-            String s1 = t1.shortName;
-            String s2 = t2.shortName;
-            return s1.compareToIgnoreCase(s2);
+        UtilityHelper.getInstance().runOnUiThread(_context, () -> {
+            availableTeams.addAll(value);
+            availableTeams.sort((t1, t2) -> {
+                String s1 = t1.shortName;
+                String s2 = t2.shortName;
+                return s1.compareToIgnoreCase(s2);
+            });
+            Gson gson = new Gson();
+            String json = gson.toJson(availableTeams);
+            editor.putString("availableTeams", json);
+            editor.apply();
+            updateTeams();
         });
-        Gson gson = new Gson();
-        String json = gson.toJson(availableTeams);
-        editor.putString("availableTeams", json);
-        editor.apply();
-        updateTeams();
+
     }
 
     @Override
     public void onError(String message) {
+        UtilityHelper.getInstance().runOnUiThread(_context, () -> {
 
+        });
     }
 }

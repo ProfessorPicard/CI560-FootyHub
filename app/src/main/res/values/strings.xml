@@ -63,7 +63,8 @@
     <string name="value25">25</string>
     <string name="value50">50</string>
 
-    <!-- Error Strings -->
-    <string name="rateLimitReached">Rate Limit Reached, Try again in %1$d seconds</string>
+    <!-- Fixture Strings -->
+    <string name="fixtureScoreString">%1$d - %2$d</string>
+    <string name="fixtureMatchweekHeader">Matchweek %1$d</string>
 
 </resources>

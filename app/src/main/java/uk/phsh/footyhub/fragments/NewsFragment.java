@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import uk.phsh.footyhub.R;
 import uk.phsh.footyhub.adapters.NewsAdapter;
+import uk.phsh.footyhub.helpers.UtilityHelper;
 import uk.phsh.footyhub.interfaces.I_FragmentCallback;
 import uk.phsh.footyhub.rest.RestManager;
 import uk.phsh.footyhub.rest.interfaces.I_TaskCallback;
@@ -102,7 +103,7 @@ public class NewsFragment extends BaseFragment implements I_TaskCallback<ArrayLi
                     break;
             }
             _updatingNews = true;
-            rm.asyncTask(new NewsSearchTask(teamName, this, getContext(), newsResults));
+            rm.asyncTask(new NewsSearchTask(teamName, this, newsResults));
         }
     }
 
@@ -114,16 +115,20 @@ public class NewsFragment extends BaseFragment implements I_TaskCallback<ArrayLi
     @SuppressLint("NotifyDataSetChanged")
     @Override
     public void onSuccess(ArrayList<NewsArticle> articles) {
-        _newsArticles.clear();
-        _articleAdapter.notifyDataSetChanged();
-        _newsArticles.addAll(articles);
-        _articleAdapter.notifyDataSetChanged();
-        _updatingNews = false;
+        UtilityHelper.getInstance().runOnUiThread(_context, () -> {
+            _newsArticles.clear();
+            _articleAdapter.notifyDataSetChanged();
+            _newsArticles.addAll(articles);
+            _articleAdapter.notifyDataSetChanged();
+            _updatingNews = false;
+        });
     }
 
     @Override
     public void onError(String message) {
-        System.out.println(message);
-        _updatingNews = false;
+        UtilityHelper.getInstance().runOnUiThread(_context, () -> {
+            System.out.println(message);
+            _updatingNews = false;
+        });
     }
 }

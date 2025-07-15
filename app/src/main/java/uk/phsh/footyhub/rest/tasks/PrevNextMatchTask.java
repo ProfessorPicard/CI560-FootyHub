@@ -1,11 +1,8 @@
 package uk.phsh.footyhub.rest.tasks;
 
-import android.content.Context;
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import uk.phsh.footyhub.enums.DateTimeType;
-import uk.phsh.footyhub.helpers.UtilityHelper;
+import uk.phsh.footyhub.rest.enums.DateTimeType;
 import uk.phsh.footyhub.rest.enums.FixtureType;
 import uk.phsh.footyhub.rest.interfaces.I_TaskCallback;
 import uk.phsh.footyhub.rest.models.Match;
@@ -26,8 +23,8 @@ public class PrevNextMatchTask extends BaseTask<Match> {
      * @param teamID The teamId for the requested fixture
      * @param type The FixtureType to be retrieved
      */
-    public PrevNextMatchTask(int teamID, FixtureType type, I_TaskCallback<Match> callback, Context context) {
-        super(callback, context);
+    public PrevNextMatchTask(int teamID, FixtureType type, I_TaskCallback<Match> callback) {
+        super(callback);
         this._teamID = teamID;
         this._type = type;
     }
@@ -74,8 +71,10 @@ public class PrevNextMatchTask extends BaseTask<Match> {
 
             m.matchID = matchObject.get("id").getAsInt();
 
-            m.matchDate = UtilityHelper.getInstance().DateTimeString(matchObject.get("utcDate").getAsString(), DateTimeType.DATE);
-            m.matchTime = UtilityHelper.getInstance().DateTimeString(matchObject.get("utcDate").getAsString(), DateTimeType.TIME);
+            String utcDate = matchObject.get("utcDate").getAsString();
+            m.matchDate = dateTimeString(utcDate, DateTimeType.DATE);
+            m.matchTime = dateTimeString(utcDate, DateTimeType.TIME);
+            m.epochTime = dateTimeString(utcDate, DateTimeType.EPOCH);
 
             m.matchType = type;
 

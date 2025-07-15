@@ -1,7 +1,5 @@
 package uk.phsh.footyhub.rest.tasks;
 
-import android.content.Context;
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -23,8 +21,8 @@ public class LeagueStandingsTask extends BaseTask<LeagueStanding> {
     /**
      * @param league The LeagueEnum to retrieve standings for
      */
-    public LeagueStandingsTask(LeagueEnum league, I_TaskCallback<LeagueStanding> callback, Context context) {
-        super(callback, context);
+    public LeagueStandingsTask(LeagueEnum league, I_TaskCallback<LeagueStanding> callback) {
+        super(callback);
         this.selectedLeague = league;
     }
 

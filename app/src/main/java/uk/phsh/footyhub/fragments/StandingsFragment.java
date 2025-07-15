@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import uk.phsh.footyhub.R;
 import uk.phsh.footyhub.adapters.StandingsListViewAdapter;
 import uk.phsh.footyhub.adapters.StandingsSpinnerAdapter;
+import uk.phsh.footyhub.helpers.UtilityHelper;
 import uk.phsh.footyhub.interfaces.I_FragmentCallback;
 import uk.phsh.footyhub.rest.RestManager;
 import uk.phsh.footyhub.rest.enums.LeagueEnum;
@@ -84,20 +85,22 @@ public class StandingsFragment extends BaseFragment implements I_TaskCallback<Le
     private void refreshStandings() {
         _positions.clear();
         RestManager rm = RestManager.getInstance(requireActivity().getCacheDir());
-        rm.asyncTask(new LeagueStandingsTask(_selectedLeague, this, getContext()));
-//        interpreter.getStandings(_selectedLeague, this);
+        rm.asyncTask(new LeagueStandingsTask(_selectedLeague, this));
     }
 
     @Override
     public void onSuccess(LeagueStanding value) {
-        _positions.addAll(value.getAllPositionInfo());
+        UtilityHelper.getInstance().runOnUiThread(_context, () -> {
+            _positions.addAll(value.getAllPositionInfo());
 
-        _positions.sort((p1, p2) -> {
-            int pInt1 = p1.position;
-            int pInt2 = p2.position;
-            return Integer.compare(pInt1, pInt2);
+            _positions.sort((p1, p2) -> {
+                int pInt1 = p1.position;
+                int pInt2 = p2.position;
+                return Integer.compare(pInt1, pInt2);
+            });
+            updateList();
         });
-        updateList();
+
     }
 
     private void updateList() {
@@ -106,6 +109,8 @@ public class StandingsFragment extends BaseFragment implements I_TaskCallback<Le
 
     @Override
     public void onError(String message) {
+        UtilityHelper.getInstance().runOnUiThread(_context, () -> {
 
+        });
     }
 }

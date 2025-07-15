@@ -1,7 +1,5 @@
 package uk.phsh.footyhub.rest.tasks;
 
-import android.content.Context;
-
 import com.google.gson.JsonObject;
 import uk.phsh.footyhub.rest.interfaces.I_TaskCallback;
 import uk.phsh.footyhub.rest.models.RestResponse;
@@ -14,8 +12,8 @@ public class TeamTask extends BaseTask<Team> {
     /**
      * @param callback Generic callback to be used to receive responses
      */
-    public TeamTask(int teamID, I_TaskCallback<Team> callback, Context context) {
-        super(callback, context);
+    public TeamTask(int teamID, I_TaskCallback<Team> callback) {
+        super(callback);
         this._teamID = teamID;
     }
 

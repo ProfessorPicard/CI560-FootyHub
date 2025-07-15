@@ -1,19 +1,24 @@
 package uk.phsh.footyhub.rest.tasks;
 
-import android.content.Context;
-import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import java.io.File;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 import java.util.concurrent.Callable;
 import okhttp3.Cache;
 import okhttp3.Headers;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import uk.phsh.footyhub.BuildConfig;
-import uk.phsh.footyhub.R;
+import uk.phsh.footyhub.rest.enums.DateTimeType;
 import uk.phsh.footyhub.rest.cache.CacheInterceptor;
 import uk.phsh.footyhub.rest.interfaces.I_RestResponse;
 import uk.phsh.footyhub.rest.interfaces.I_TaskCallback;
@@ -29,7 +34,6 @@ public abstract class BaseTask<T> implements Callable<RestResponse>, I_RestRespo
     private static OkHttpClient client;
     private final I_TaskCallback<T> _callback;
     private final Gson _gson;
-    private final Context _context;
 
     /**
      * @return String The url of the http request
@@ -40,10 +44,9 @@ public abstract class BaseTask<T> implements Callable<RestResponse>, I_RestRespo
     /**
      * @param callback Generic callback to be used to receive responses
      */
-    public BaseTask(I_TaskCallback<T> callback, Context context) {
+    public BaseTask(I_TaskCallback<T> callback) {
         _callback = callback;
         _gson = new Gson();
-        _context = context;
     }
 
     /**
@@ -105,18 +108,60 @@ public abstract class BaseTask<T> implements Callable<RestResponse>, I_RestRespo
 
     @Override
     public void onError(RestResponse response) {
-        Log.e("RestParsingManager : " + getTag(), "Error Code: " + response.getResponseCode() + " | Message: " + response.getResponseBody());
-        _callback.onError(response.getResponseBody());
+        _callback.onError("An error has occurred");
     }
 
     @Override
     public void onRateLimitReached(int secondsRemaining) {
-        _callback.onError(_context.getString(R.string.rateLimitReached, secondsRemaining));
+        _callback.onError(String.format(Locale.ENGLISH,"Rate Limit Reached, Try again in %1$d seconds", secondsRemaining));
     }
 
     protected JsonObject getBaseObject(String json) {
         JsonElement element = JsonParser.parseString(json);
         return element.getAsJsonObject();
+    }
+
+    /**
+     * Formats a given UTC date time string from the rest responses
+     * @param dateTimeStr UTC formatted datetime string from rest response
+     * @return String Formatted date time string into MMMM dd YYYY hh:mm
+     */
+    protected String dateTimeString(String dateTimeStr, DateTimeType type) {
+        DateTimeFormatter dtf = null;
+
+        switch (type) {
+            case DATE:
+                dtf = DateTimeFormatter.ofPattern("MMM dd yyyy");
+                break;
+            case TIME:
+                dtf = DateTimeFormatter.ofPattern("HH:mm");
+                break;
+            case DATETIME:
+                dtf = DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a");
+                break;
+            case EPOCH:
+                dtf = DateTimeFormatter.ofPattern("yyy-MM-dd HH:mm:ss");
+                return "" + LocalDate.parse(dateTimeStr.replace("T", " ").replace("Z", ""), dtf).atStartOfDay()
+                        .atOffset(ZoneOffset.ofHours(1))
+                        .toInstant()
+                        .toEpochMilli();
+        }
+
+        Instant instant = Instant.parse(dateTimeStr);
+        ZonedDateTime dateTime = ZonedDateTime.ofInstant(instant, ZoneOffset.ofHours(1));
+
+        return dateTime.format(dtf);
+    }
+
+    /**
+     * Formats a given Epoch time string
+     * @param epochTime Epoch time in seconds
+     * @return String Formatted date time string into MMMM dd YYYY hh:mm
+     */
+    protected String epochToDateTimeString(String epochTime) {
+        LocalDateTime dateTime = LocalDateTime.ofEpochSecond(Long.parseLong(epochTime), 0, ZoneOffset.UTC);
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
+        return dateTime.format(dtf);
     }
 
 }

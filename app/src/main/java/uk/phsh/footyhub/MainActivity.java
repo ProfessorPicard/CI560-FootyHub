@@ -1,19 +1,16 @@
 package uk.phsh.footyhub;
 
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -22,12 +19,9 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.PreferenceManager;
-
 import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
 import java.util.Objects;
-
 import uk.phsh.footyhub.adapters.DrawNavAdapter;
 import uk.phsh.footyhub.fragments.BaseFragment;
 import uk.phsh.footyhub.fragments.FixtureFragment;
@@ -41,28 +35,18 @@ import uk.phsh.footyhub.models.NavItem;
 
 public class MainActivity extends AppCompatActivity implements I_FragmentCallback, SharedPreferences.OnSharedPreferenceChangeListener {
 
-
     private HomeFragment _homeFragment;
     private SelectTeamFragment _selectTeamFragment;
     private NewsFragment _newsFragment;
     private FixtureFragment _fixturesFragment;
     private StandingsFragment _standingsFragment;
     private SettingsFragment _settingsFragment;
-
-
     private ListView _navDrawerList;
     private RelativeLayout _drawContainer;
     private ActionBarDrawerToggle _drawerToggle;
     private DrawerLayout _drawerLayout;
-    private RelativeLayout _selectedTeamContainer;
-    private TextView _selectedTeamTxt;
-    private ImageView _selectedTeamImg;
-
     private boolean _darkMode;
-
-    ArrayList<NavItem> _navItems = new ArrayList<>();
-
-    //Actionbar Variables
+    private final ArrayList<NavItem> _navItems = new ArrayList<>();
     private ActionBar actionBar;
 
     @Override
@@ -105,12 +89,7 @@ public class MainActivity extends AppCompatActivity implements I_FragmentCallbac
         DrawNavAdapter adapter = new DrawNavAdapter(this, _navItems);
         _navDrawerList.setAdapter(adapter);
 
-        _navDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                selectItemFromDrawer(position);
-            }
-        });
+        _navDrawerList.setOnItemClickListener((parent, view, position, id) -> selectItemFromDrawer(position));
 
         _drawerToggle = new ActionBarDrawerToggle(this, _drawerLayout, R.string.drawer_open, R.string.drawer_closed) {
             @Override
@@ -133,9 +112,10 @@ public class MainActivity extends AppCompatActivity implements I_FragmentCallbac
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.primary, null)));
 
-        _selectedTeamContainer = findViewById(R.id.selectedTeamContainer);
-        _selectedTeamImg = findViewById(R.id.selectedTeamImg);
-        _selectedTeamTxt = findViewById(R.id.selectedTeamTxt);
+        RelativeLayout _selectedTeamContainer = findViewById(R.id.selectedTeamContainer);
+        ImageView _selectedTeamImg = findViewById(R.id.selectedTeamImg);
+        TextView _selectedTeamTxt = findViewById(R.id.selectedTeamTxt);
+
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         boolean favTeamSelected = prefs.getBoolean("favouriteTeamSelected", false);
 
@@ -163,7 +143,7 @@ public class MainActivity extends AppCompatActivity implements I_FragmentCallbac
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (_drawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
@@ -187,7 +167,7 @@ public class MainActivity extends AppCompatActivity implements I_FragmentCallbac
 
     @Override
     public void changeActionbarTitle(String title) {
-        actionBar.setTitle(title);
+        runOnUiThread(() -> actionBar.setTitle(title));
     }
 
     private void setDarkMode() {

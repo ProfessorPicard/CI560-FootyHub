@@ -1,12 +1,10 @@
 package uk.phsh.footyhub.rest.tasks;
-import android.content.Context;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import java.util.ArrayList;
-import uk.phsh.footyhub.helpers.UtilityHelper;
 import uk.phsh.footyhub.rest.interfaces.I_TaskCallback;
 import uk.phsh.footyhub.rest.models.NewsArticle;
 import uk.phsh.footyhub.rest.models.RestResponse;
@@ -23,8 +21,8 @@ public class NewsSearchTask extends BaseTask<ArrayList<NewsArticle>> {
     /**
      * @param teamName The team name to retrieve news for
      */
-    public NewsSearchTask(String teamName, I_TaskCallback<ArrayList<NewsArticle>> callback, Context context, int maxResults) {
-        super(callback, context);
+    public NewsSearchTask(String teamName, I_TaskCallback<ArrayList<NewsArticle>> callback, int maxResults) {
+        super(callback);
         _teamName = teamName;
         _maxResults = maxResults;
     }
@@ -67,7 +65,7 @@ public class NewsSearchTask extends BaseTask<ArrayList<NewsArticle>> {
             Element meta = articleEle.getElementsByAttributeValue("class", "meta").get(0);
             String publisher = meta.getElementsByAttributeValueContaining("class", "src").get(0).text();
             String timeAtt = meta.getElementsByAttributeValue("class", "time").get(0).attr("data-time");
-            String timeStamp = UtilityHelper.getInstance().epochToDateTimeString(timeAtt);
+            String timeStamp = epochToDateTimeString(timeAtt);
 
             //Create a new NewsArticle object
             NewsArticle na = new NewsArticle();

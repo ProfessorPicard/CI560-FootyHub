@@ -1,7 +1,5 @@
 package uk.phsh.footyhub.rest.enums;
 
-import androidx.annotation.NonNull;
-
 /**
  * The type of league used in searches. Contains league name and code.
  * @author Peter Blackburn
@@ -41,7 +39,6 @@ public enum LeagueEnum {
      * Overrides toString to return the Readable name
      * @return String The readable name
      */
-    @NonNull
     @Override
     public String toString() {
         return getReadableName();

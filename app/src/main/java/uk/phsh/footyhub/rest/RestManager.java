@@ -1,7 +1,5 @@
 package uk.phsh.footyhub.rest;
 
-import android.os.Handler;
-import android.os.Looper;
 import java.io.File;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -10,8 +8,7 @@ import uk.phsh.footyhub.rest.tasks.BaseTask;
 
 public class RestManager {
 
-    private final Executor _executor = Executors.newSingleThreadExecutor();
-    private final Handler _handler = new Handler(Looper.getMainLooper());
+    private final Executor _executor = Executors.newFixedThreadPool(4);
     private long rateLimitTimestamp = 0;
     private final File _cacheDir;
 
@@ -39,7 +36,8 @@ public class RestManager {
                 long currentTime = System.currentTimeMillis();
                 if(currentTime > rateLimitTimestamp) {
                     final RestResponse result = task.call();
-                    _handler.post(() -> {
+
+                    _executor.execute(() -> {
                         switch (result.getResponseCode()) {
                             case 200:
                                 task.onSuccess(result);
@@ -48,7 +46,7 @@ public class RestManager {
                                 String response = result.getResponseBody();
                                 String[] temp = response.substring(response.indexOf("Wait")).split(" ");
                                 int secondsLeft = Integer.parseInt(temp[1].trim());
-                                rateLimitTimestamp = System.currentTimeMillis() + ((long)secondsLeft * 1000);
+                                rateLimitTimestamp = System.currentTimeMillis() + ((long) secondsLeft * 1000);
                                 task.onRateLimitReached(secondsLeft);
                                 break;
                             default:

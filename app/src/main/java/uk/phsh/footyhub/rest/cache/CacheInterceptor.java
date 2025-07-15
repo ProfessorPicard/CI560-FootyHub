@@ -1,6 +1,5 @@
 package uk.phsh.footyhub.rest.cache;
 
-import androidx.annotation.NonNull;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 import okhttp3.CacheControl;
@@ -18,7 +17,6 @@ public class CacheInterceptor implements Interceptor {
      * @return Response The modified okHttp Response
      * @throws IOException IoException thrown on error
      */
-    @NonNull
     @Override
     public Response intercept(Chain chain) throws IOException {
         Response response = chain.proceed(chain.request());
