@@ -26,6 +26,7 @@
     <string name="newsHeader">%1$s News</string>
     <string name="nextFixtureTitle">%1$s v %2$s</string>
     <string name="prevFixtureTitle">%1$s v %2$s</string>
+    <string name="newsArticleHeader">News Articles</string>
 
     <!-- Drawer Menu Strings -->
     <string name="home_drawer_menu">Home</string>
@@ -55,6 +56,12 @@
     <string name="standingsHeaderLogoContent">Club logo header</string>
     <string name="standingsClubLogoContent">Club logo</string>
     <string name="standingsDropDownImg">League spinner icon</string>
+
+    <!-- News Fragment Strings -->
+    <string name="maxHeader">Max Results</string>
+    <string name="value10">10</string>
+    <string name="value25">25</string>
+    <string name="value50">50</string>
 
     <!-- Error Strings -->
     <string name="rateLimitReached">Rate Limit Reached, Try again in %1$d seconds</string>

@@ -18,13 +18,15 @@ import uk.phsh.footyhub.rest.models.RestResponse;
 public class NewsSearchTask extends BaseTask<ArrayList<NewsArticle>> {
 
     private final String _teamName;
+    private final int _maxResults;
 
     /**
      * @param teamName The team name to retrieve news for
      */
-    public NewsSearchTask(String teamName, I_TaskCallback<ArrayList<NewsArticle>> callback, Context context) {
+    public NewsSearchTask(String teamName, I_TaskCallback<ArrayList<NewsArticle>> callback, Context context, int maxResults) {
         super(callback, context);
         _teamName = teamName;
+        _maxResults = maxResults;
     }
 
     /**
@@ -49,7 +51,7 @@ public class NewsSearchTask extends BaseTask<ArrayList<NewsArticle>> {
         Document d = Jsoup.parse(response.getResponseBody());
 
         Elements articlesEle = d.getElementsByAttributeValue("class", "hl__inner");
-        int max = Math.min(articlesEle.size(), 10);
+        int max = Math.min(articlesEle.size(), _maxResults);
         for(int i=0; i<max; i++) {
 
             Element articleEle = articlesEle.get(i);
@@ -58,7 +60,7 @@ public class NewsSearchTask extends BaseTask<ArrayList<NewsArticle>> {
 
             //News site contains a phantom news article that is a subscribe option. We skip this.
             if(url.equals("/subscribe"))
-                break;
+                continue;
 
             //Parse out all relevant pieces of the news article.
             String headlineTxt = articleEle.getElementsByAttributeValue("class", "hll").get(0).text();
