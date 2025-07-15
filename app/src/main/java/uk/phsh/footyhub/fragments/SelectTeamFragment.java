@@ -97,8 +97,8 @@ public class SelectTeamFragment extends BaseFragment implements I_TaskCallback<A
 
         if(teamsStr.isEmpty()) {
             RestManager rm = RestManager.getInstance(requireActivity().getCacheDir());
-            rm.asyncTask(new LeagueTeamsTask(LeagueEnum.PREMIER_LEAGUE, this));
-            rm.asyncTask(new LeagueTeamsTask(LeagueEnum.CHAMPIONSHIP, this));
+            rm.asyncTask(new LeagueTeamsTask(LeagueEnum.PREMIER_LEAGUE, this, getContext()));
+            rm.asyncTask(new LeagueTeamsTask(LeagueEnum.CHAMPIONSHIP, this, getContext()));
         } else {
             Gson gson = new Gson();
             JsonElement element = JsonParser.parseString(teamsStr);
@@ -133,11 +133,6 @@ public class SelectTeamFragment extends BaseFragment implements I_TaskCallback<A
         editor.putString("availableTeams", json);
         editor.apply();
         updateTeams();
-    }
-
-    @Override
-    public void onRateLimitReached(int secondsRemaining) {
-
     }
 
     @Override

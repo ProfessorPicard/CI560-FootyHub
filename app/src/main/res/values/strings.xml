@@ -42,4 +42,21 @@
     <string name="prefTeamLogoSummary">Favourite Team Logo: %1$s</string>
     <string name="prefTeamIdSummary">Favourite Team ID: %1$d</string>
 
+    <!-- Standings Strings -->
+    <string name="standingsHeader">Standings</string>
+    <string name="standingsHeaderPos">Pos</string>
+    <string name="standingsHeaderClub">Club</string>
+    <string name="standingsHeaderPlayed">PL</string>
+    <string name="standingsHeaderWon">W</string>
+    <string name="standingsHeaderDrawn">D</string>
+    <string name="standingsHeaderLost">L</string>
+    <string name="standingsHeaderGD">GD</string>
+    <string name="standingsHeaderPoints">Pts</string>
+    <string name="standingsHeaderLogoContent">Club logo header</string>
+    <string name="standingsClubLogoContent">Club logo</string>
+    <string name="standingsDropDownImg">League spinner icon</string>
+
+    <!-- Error Strings -->
+    <string name="rateLimitReached">Rate Limit Reached, Try again in %1$d seconds</string>
+
 </resources>

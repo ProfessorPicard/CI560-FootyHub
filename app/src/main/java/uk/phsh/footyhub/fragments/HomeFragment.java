@@ -1,5 +1,6 @@
 package uk.phsh.footyhub.fragments;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,11 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.preference.PreferenceManager;
 import com.squareup.picasso.Picasso;
 import java.util.Locale;
 import uk.phsh.footyhub.R;
+import uk.phsh.footyhub.controls.FixtureControl;
 import uk.phsh.footyhub.interfaces.I_FragmentCallback;
 import uk.phsh.footyhub.rest.RestManager;
 import uk.phsh.footyhub.rest.enums.FixtureType;
@@ -24,26 +27,27 @@ import uk.phsh.footyhub.rest.tasks.TeamTask;
 public class HomeFragment extends BaseFragment {
 
     private CardView teamDetailsContainer;
-    private CardView nextFixtureContainer;
-    private CardView prevFixtureContainer;
+    private FixtureControl nextFixtureContainer;
+    private FixtureControl prevFixtureContainer;
 
     private TextView venueTxt;
     private TextView addressTxt;
     private TextView foundedTxt;
     private TextView coachTxt;
-    private TextView nextFixtureTitle;
-    private TextView nextFixtureDate;
-    private TextView nextFixtureTime;
-    private TextView prevFixtureTitle;
-    private TextView prevFixtureDate;
-    private TextView prevFixtureTime;
-    private TextView prevFixtureHomeScore;
-    private TextView prevFixtureAwayScore;
 
-    private ImageView nextFixtureHomeImg;
-    private ImageView nextFixtureAwayImg;
-    private ImageView prevFixtureHomeImg;
-    private ImageView prevFixtureAwayImg;
+//    private TextView nextFixtureTitle;
+//    private TextView nextFixtureDate;
+//    private TextView nextFixtureTime;
+//    private TextView prevFixtureTitle;
+//    private TextView prevFixtureDate;
+//    private TextView prevFixtureTime;
+//    private TextView prevFixtureHomeScore;
+//    private TextView prevFixtureAwayScore;
+
+//    private ImageView nextFixtureHomeImg;
+//    private ImageView nextFixtureAwayImg;
+//    private ImageView prevFixtureHomeImg;
+//    private ImageView prevFixtureAwayImg;
     private ImageView teamDetailsImg;
 
     public HomeFragment() { super(); }
@@ -77,36 +81,30 @@ public class HomeFragment extends BaseFragment {
         coachTxt = v.findViewById(R.id.coachTxt);
         teamDetailsImg = v.findViewById(R.id.teamDetailsImg);
 
-        nextFixtureTitle = v.findViewById(R.id.nextFixtureTitle);
-        nextFixtureDate = v.findViewById(R.id.nextFixtureDate);
-        nextFixtureTime = v.findViewById(R.id.nextFixtureTime);
-
-        prevFixtureTitle = v.findViewById(R.id.prevFixtureTitle);
-        prevFixtureHomeScore = v.findViewById(R.id.prevFixtureHomeScore);
-        prevFixtureDate = v.findViewById(R.id.prevFixtureDate);
-        prevFixtureTime = v.findViewById(R.id.prevFixtureTime);
-        prevFixtureAwayScore = v.findViewById(R.id.prevFixtureAwayScore);
-
-        nextFixtureHomeImg = v.findViewById(R.id.nextFixtureHomeImg);
-        nextFixtureAwayImg = v.findViewById(R.id.nextFixtureAwayImg);
-        prevFixtureHomeImg = v.findViewById(R.id.prevFixtureHomeImg);
-        prevFixtureAwayImg = v.findViewById(R.id.prevFixtureAwayImg);
-
         return v;
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
     }
 
     @Override
     public void onStart() {
         super.onStart();
-
         RestManager rm = RestManager.getInstance(requireActivity().getCacheDir());
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(requireActivity());
         int teamID = prefs.getInt("favouriteTeamID", -1);
+        boolean showDetails = prefs.getBoolean("showDetails", false);
+        boolean showPrevResult = prefs.getBoolean("showPrev", false);
+        boolean showNextFixture = prefs.getBoolean("showNext", false);
+//        boolean showNews = prefs.getBoolean("showNews", false);
 
         if(teamID != -1) {
 
-            if (prefs.getBoolean("showDetails", false)) {
+            if (showDetails) {
                 I_TaskCallback<Team> teamCallback = new I_TaskCallback<>() {
                     @Override
                     public void onSuccess(Team value) {
@@ -119,90 +117,76 @@ public class HomeFragment extends BaseFragment {
                     }
 
                     @Override
-                    public void onRateLimitReached(int secondsRemaining) {
-
-                    }
-
-                    @Override
                     public void onError(String message) {
                         teamDetailsContainer.setVisibility(View.GONE);
                     }
                 };
-                rm.asyncTask(new TeamTask(teamID, teamCallback));
+                rm.asyncTask(new TeamTask(teamID, teamCallback, getContext()));
             } else {
                 teamDetailsContainer.setVisibility(View.GONE);
             }
 
-            if (prefs.getBoolean("showNext", false)) {
+            if (showNextFixture) {
+                nextFixtureContainer.setVisibility(View.VISIBLE);
                 I_TaskCallback<Match> nextCallback = new I_TaskCallback<>() {
                     @Override
                     public void onSuccess(Match value) {
-                        nextFixtureContainer.setVisibility(View.VISIBLE);
-                        nextFixtureTitle.setText(getString(R.string.nextFixtureTitle,value.homeTeam.tla ,value.awayTeam.tla));
-                        Picasso.get().load(value.homeTeam.crest).into(nextFixtureHomeImg);
-                        Picasso.get().load(value.awayTeam.crest).into(nextFixtureAwayImg);
-
-                        nextFixtureDate.setText(value.matchDate);
-                        nextFixtureTime.setText(value.matchTime);
-                    }
-
-                    @Override
-                    public void onRateLimitReached(int secondsRemaining) {
-
+                        nextFixtureContainer.showError(false);
+                        nextFixtureContainer.setTitle(getString(R.string.nextFixtureTitle,value.homeTeam.tla ,value.awayTeam.tla));
+                        nextFixtureContainer.setHomeImgSrc(value.homeTeam.crest);
+                        nextFixtureContainer.setAwayImgSrc(value.awayTeam.crest);
+                        nextFixtureContainer.setFixtureDate(value.matchDate);
+                        nextFixtureContainer.setFixtureTime(value.matchTime);
                     }
 
                     @Override
                     public void onError(String message) {
-                        nextFixtureContainer.setVisibility(View.GONE);
+                        nextFixtureContainer.setErrorMessage(message);
+                        nextFixtureContainer.showError(true);
                     }
                 };
-                rm.asyncTask(new PrevNextMatchTask(teamID, FixtureType.SCHEDULED, nextCallback));
+                rm.asyncTask(new PrevNextMatchTask(teamID, FixtureType.SCHEDULED, nextCallback, getContext()));
             } else {
                 nextFixtureContainer.setVisibility(View.GONE);
             }
 
-            if (prefs.getBoolean("showPrev", false)) {
+            if (showPrevResult) {
+                prevFixtureContainer.setVisibility(View.VISIBLE);
                 I_TaskCallback<Match> prevCallback = new I_TaskCallback<>() {
                     @Override
                     public void onSuccess(Match value) {
-                        prevFixtureContainer.setVisibility(View.VISIBLE);
-                        prevFixtureTitle.setText(String.format(String.valueOf(R.string.prevFixtureTitle), value.homeTeam.tla ,value.awayTeam.tla));
-                        Picasso.get().load(value.homeTeam.crest).into(prevFixtureHomeImg);
-                        Picasso.get().load(value.awayTeam.crest).into(prevFixtureAwayImg);
-
-                        prevFixtureHomeScore.setText(String.format(Locale.UK, "%d", value.fullTime.homeScore));
-                        prevFixtureAwayScore.setText(String.format(Locale.UK,"%d", value.fullTime.awayScore));
-
-                        prevFixtureDate.setText(value.matchDate);
-                        prevFixtureTime.setText(value.matchTime);
-                    }
-
-                    @Override
-                    public void onRateLimitReached(int secondsRemaining) {
-
+                        prevFixtureContainer.showError(false);
+                        prevFixtureContainer.setTitle(getString(R.string.prevFixtureTitle,value.homeTeam.tla ,value.awayTeam.tla));
+                        prevFixtureContainer.setHomeImgSrc(value.homeTeam.crest);
+                        prevFixtureContainer.setAwayImgSrc(value.awayTeam.crest);
+                        prevFixtureContainer.setHomeScore(value.fullTime.homeScore);
+                        prevFixtureContainer.setAwayScore(value.fullTime.awayScore);
+                        prevFixtureContainer.setFixtureDate(value.matchDate);
+                        prevFixtureContainer.setFixtureTime(value.matchTime);
                     }
 
                     @Override
                     public void onError(String message) {
-                        prevFixtureContainer.setVisibility(View.GONE);
+                        prevFixtureContainer.setErrorMessage(message);
+                        prevFixtureContainer.showError(true);
                     }
                 };
-                rm.asyncTask(new PrevNextMatchTask(teamID, FixtureType.FINISHED, prevCallback));
+                rm.asyncTask(new PrevNextMatchTask(teamID, FixtureType.FINISHED, prevCallback, getContext()));
             } else {
                 prevFixtureContainer.setVisibility(View.GONE);
             }
 
-//            if (prefs.getBoolean("showNews", false)) {
+//            if (showNews) {
 //                // Do Stuff
 //            } else {
 //                // Dont Do Stuff
 //            }
         }
-
     }
 
     @Override
     public String getActionBarTitle() {
         return getResources().getString(R.string.home_fragment_actionbar);
     }
+
 }

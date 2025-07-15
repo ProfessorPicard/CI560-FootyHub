@@ -1,5 +1,6 @@
 package uk.phsh.footyhub.rest.tasks;
 
+import android.content.Context;
 import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
@@ -12,6 +13,7 @@ import okhttp3.Headers;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import uk.phsh.footyhub.BuildConfig;
+import uk.phsh.footyhub.R;
 import uk.phsh.footyhub.rest.cache.CacheInterceptor;
 import uk.phsh.footyhub.rest.interfaces.I_RestResponse;
 import uk.phsh.footyhub.rest.interfaces.I_TaskCallback;
@@ -27,6 +29,7 @@ public abstract class BaseTask<T> implements Callable<RestResponse>, I_RestRespo
     private static OkHttpClient client;
     private final I_TaskCallback<T> _callback;
     private final Gson _gson;
+    private final Context _context;
 
     /**
      * @return String The url of the http request
@@ -37,9 +40,10 @@ public abstract class BaseTask<T> implements Callable<RestResponse>, I_RestRespo
     /**
      * @param callback Generic callback to be used to receive responses
      */
-    public BaseTask(I_TaskCallback<T> callback) {
+    public BaseTask(I_TaskCallback<T> callback, Context context) {
         _callback = callback;
         _gson = new Gson();
+        _context = context;
     }
 
     /**
@@ -102,11 +106,12 @@ public abstract class BaseTask<T> implements Callable<RestResponse>, I_RestRespo
     @Override
     public void onError(RestResponse response) {
         Log.e("RestParsingManager : " + getTag(), "Error Code: " + response.getResponseCode() + " | Message: " + response.getResponseBody());
+        _callback.onError(response.getResponseBody());
     }
 
     @Override
     public void onRateLimitReached(int secondsRemaining) {
-        _callback.onRateLimitReached(secondsRemaining);
+        _callback.onError(_context.getString(R.string.rateLimitReached, secondsRemaining));
     }
 
     protected JsonObject getBaseObject(String json) {

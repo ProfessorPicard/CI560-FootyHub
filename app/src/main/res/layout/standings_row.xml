@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:background="@color/primary_variant"
+    android:columnCount="9">
+
+    <TextView
+        android:id="@+id/positionTxt"
+        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_columnSpan="1"
+        android:layout_columnWeight="1"
+        android:layout_column="0"
+        android:gravity="center"
+        android:textColor="@color/primary_on"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/teamLogoImg"
+        android:layout_height="30dp"
+        android:layout_width="30dp"
+        android:layout_margin="5dp"
+        android:layout_column="1"
+        android:layout_columnSpan="1"
+        android:layout_columnWeight="1"
+        android:contentDescription="@string/standingsClubLogoContent"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/teamCodeTxt"
+        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_columnSpan="1"
+        android:layout_columnWeight="1"
+        android:layout_column="2"
+        android:gravity="center"
+        android:textColor="@color/primary_on"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/playedTxt"
+        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_columnSpan="1"
+        android:layout_columnWeight="1"
+        android:layout_column="3"
+        android:textColor="@color/primary_on"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/wonTxt"
+        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_columnSpan="1"
+        android:layout_columnWeight="1"
+        android:layout_column="4"
+        android:textColor="@color/primary_on"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/drawnTxt"
+        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_columnSpan="1"
+        android:layout_columnWeight="1"
+        android:layout_column="5"
+        android:textColor="@color/primary_on"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/lostTxt"
+        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_columnSpan="1"
+        android:layout_columnWeight="1"
+        android:layout_column="6"
+        android:textColor="@color/primary_on"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/goalDiffTxt"
+        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_columnSpan="1"
+        android:layout_columnWeight="1"
+        android:layout_column="7"
+        android:textColor="@color/primary_on"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/pointsTxt"
+        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_columnSpan="1"
+        android:layout_columnWeight="1"
+        android:layout_column="8"
+        android:textColor="@color/primary_on"
+        android:gravity="center" />
+
+</GridLayout>

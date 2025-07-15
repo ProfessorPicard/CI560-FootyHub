@@ -1,4 +1,6 @@
 package uk.phsh.footyhub.rest.tasks;
+import android.content.Context;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -20,8 +22,8 @@ public class NewsSearchTask extends BaseTask<ArrayList<NewsArticle>> {
     /**
      * @param teamName The team name to retrieve news for
      */
-    public NewsSearchTask(String teamName, I_TaskCallback<ArrayList<NewsArticle>> callback) {
-        super(callback);
+    public NewsSearchTask(String teamName, I_TaskCallback<ArrayList<NewsArticle>> callback, Context context) {
+        super(callback, context);
         _teamName = teamName;
     }
 

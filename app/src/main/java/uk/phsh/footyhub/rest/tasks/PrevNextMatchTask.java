@@ -1,5 +1,7 @@
 package uk.phsh.footyhub.rest.tasks;
 
+import android.content.Context;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import uk.phsh.footyhub.enums.DateTimeType;
@@ -24,8 +26,8 @@ public class PrevNextMatchTask extends BaseTask<Match> {
      * @param teamID The teamId for the requested fixture
      * @param type The FixtureType to be retrieved
      */
-    public PrevNextMatchTask(int teamID, FixtureType type, I_TaskCallback<Match> callback) {
-        super(callback);
+    public PrevNextMatchTask(int teamID, FixtureType type, I_TaskCallback<Match> callback, Context context) {
+        super(callback, context);
         this._teamID = teamID;
         this._type = type;
     }
