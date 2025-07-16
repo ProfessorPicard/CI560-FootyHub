@@ -10,7 +10,9 @@ apiProperties.load(new FileInputStream(rootProject.file("api.properties")))
 android {
     namespace 'uk.phsh.footyhub'
     compileSdk 36
-    buildFeatures.buildConfig = true
+    buildFeatures {
+        buildConfig = true
+    }
 
     defaultConfig {
         applicationId "uk.phsh.footyhub"
@@ -28,7 +30,17 @@ android {
         }
         release {
             minifyEnabled false
+            buildConfigField("String", "API_KEY", apiProperties['API_KEY'])
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+        }
+        applicationVariants.all{
+            variant ->
+                variant.outputs.each{
+                    output->
+                        def name = "FootyHub.apk"
+                        output.outputFileName = name
+                }
         }
     }
     compileOptions {
