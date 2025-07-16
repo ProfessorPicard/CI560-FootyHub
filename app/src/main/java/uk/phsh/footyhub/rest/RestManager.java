@@ -29,7 +29,7 @@ public class RestManager {
      * Sends Http Requests on a separate thread and forwards the response
      * @param task Any extended AbstractTask to be executed
      */
-    public void asyncTask(BaseTask task) {
+    public void asyncTask(BaseTask<?> task ) {
         task.setupOkHTTP(_cacheDir);
         _executor.execute(() -> {
             try {

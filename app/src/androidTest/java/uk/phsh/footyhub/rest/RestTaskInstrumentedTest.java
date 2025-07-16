@@ -56,7 +56,7 @@ public class RestTaskInstrumentedTest {
                 assertNotNull(message);
             }
         };
-        rpm.asyncTask(new LeagueTeamsTask(league, callback));
+        rpm.asyncTask(new LeagueTeamsTask(callback, league));
     }
 
     @Test

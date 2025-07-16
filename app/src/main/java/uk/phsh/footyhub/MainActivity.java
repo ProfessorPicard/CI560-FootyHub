@@ -35,11 +35,6 @@ import uk.phsh.footyhub.models.NavItem;
 
 public class MainActivity extends AppCompatActivity implements I_FragmentCallback, SharedPreferences.OnSharedPreferenceChangeListener {
 
-    private HomeFragment _homeFragment;
-    private SelectTeamFragment _selectTeamFragment;
-    private NewsFragment _newsFragment;
-    private FixtureFragment _fixturesFragment;
-    private StandingsFragment _standingsFragment;
     private SettingsFragment _settingsFragment;
     private ListView _navDrawerList;
     private RelativeLayout _drawContainer;
@@ -52,7 +47,6 @@ public class MainActivity extends AppCompatActivity implements I_FragmentCallbac
     @Override
     public void recreate() {
         super.recreate();
-//        setup();
     }
 
     @Override
@@ -69,11 +63,11 @@ public class MainActivity extends AppCompatActivity implements I_FragmentCallbac
 
         setContentView(R.layout.activity_main);
 
-        _homeFragment = new HomeFragment(this);
-        _selectTeamFragment = new SelectTeamFragment(this);
-        _newsFragment = new NewsFragment(this);
-        _fixturesFragment = new FixtureFragment(this);
-        _standingsFragment = new StandingsFragment(this);
+        HomeFragment _homeFragment = new HomeFragment(this);
+        SelectTeamFragment _selectTeamFragment = new SelectTeamFragment(this);
+        NewsFragment _newsFragment = new NewsFragment(this);
+        FixtureFragment _fixturesFragment = new FixtureFragment(this);
+        StandingsFragment _standingsFragment = new StandingsFragment(this);
         _settingsFragment = new SettingsFragment(this);
 
         _navItems.add(new NavItem(getResources().getString(R.string.change_favourite_drawer_menu), R.drawable.change, _selectTeamFragment));
@@ -108,9 +102,12 @@ public class MainActivity extends AppCompatActivity implements I_FragmentCallbac
             }
         };
         _drawerLayout.addDrawerListener(_drawerToggle);
-        actionBar = Objects.requireNonNull(getSupportActionBar());
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.primary, null)));
+        actionBar = getSupportActionBar();
+
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.primary, null)));
+        }
 
         RelativeLayout _selectedTeamContainer = findViewById(R.id.selectedTeamContainer);
         ImageView _selectedTeamImg = findViewById(R.id.selectedTeamImg);
@@ -186,7 +183,6 @@ public class MainActivity extends AppCompatActivity implements I_FragmentCallbac
             case "darkMode":
                 _darkMode = sharedPreferences.getBoolean(key, false);
                 setDarkMode();
-                recreate();
                 break;
             case "favouriteTeamSelected":
                 if(!sharedPreferences.getBoolean(key, false)) {
@@ -196,7 +192,6 @@ public class MainActivity extends AppCompatActivity implements I_FragmentCallbac
                     editor.putString("favouriteTeamLogo", "");
                     editor.putInt("favouriteTeamID", -1);
                     editor.apply();
-                    recreate();
                 }
                 break;
         }
@@ -205,11 +200,5 @@ public class MainActivity extends AppCompatActivity implements I_FragmentCallbac
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        _homeFragment = null;
-        _selectTeamFragment = null;
-        _newsFragment = null;
-        _fixturesFragment = null;
-        _standingsFragment = null;
-        _settingsFragment = null;
     }
 }

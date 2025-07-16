@@ -45,7 +45,7 @@ public class TeamGridViewAdapter extends ArrayAdapter<Team> {
 
         View itemView = convertView;
         if (itemView == null) {
-            itemView = LayoutInflater.from(getContext()).inflate(R.layout.card_item, parent, false);
+            itemView = LayoutInflater.from(getContext()).inflate(R.layout.select_team_card, parent, false);
         }
 
         Team team = getItem(position);

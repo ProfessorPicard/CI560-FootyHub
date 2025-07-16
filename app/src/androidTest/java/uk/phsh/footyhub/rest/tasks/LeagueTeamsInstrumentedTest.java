@@ -12,13 +12,13 @@ import uk.phsh.footyhub.rest.models.RestResponse;
 import uk.phsh.footyhub.rest.models.Team;
 
 public class LeagueTeamsInstrumentedTest {
-    LeagueTeamsTask ltt = new LeagueTeamsTask(LeagueEnum.PREMIER_LEAGUE, new I_TaskCallback<>() {
+    LeagueTeamsTask ltt = new LeagueTeamsTask(new I_TaskCallback<>() {
         @Override
         public void onSuccess(ArrayList<Team> teams) { }
 
         @Override
         public void onError(String message) { }
-    });
+    }, LeagueEnum.PREMIER_LEAGUE);
 
     @Test
     public void getUrl() {

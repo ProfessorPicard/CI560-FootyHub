@@ -48,12 +48,13 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         Preference teamName = findPreference("favouriteTeamName");
         Preference teamLogo = findPreference("favouriteTeamLogo");
         Preference teamID = findPreference("favouriteTeamID");
-        assert teamName != null;
-        teamName.setSummary(getString(R.string.prefTeamNameSummary, favTeamName));
-        assert teamLogo != null;
-        teamLogo.setSummary(getString(R.string.prefTeamLogoSummary, favTeamLogo));
-        assert teamID != null;
-        teamID.setSummary(getString(R.string.prefTeamIdSummary, favTeamID));
+
+        if (teamName != null)
+            teamName.setSummary(getString(R.string.prefTeamNameSummary, favTeamName));
+        if (teamLogo != null)
+            teamLogo.setSummary(getString(R.string.prefTeamLogoSummary, favTeamLogo));
+        if (teamID != null)
+            teamID.setSummary(getString(R.string.prefTeamIdSummary, favTeamID));
     }
 
     @Override

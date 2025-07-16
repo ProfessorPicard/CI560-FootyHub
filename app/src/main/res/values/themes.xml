@@ -20,9 +20,10 @@
 
     </style>
 
-    <style name="AlertDialogCustom" parent="@android:style/Theme.Dialog">
+    <style name="AlertDialogCustom" parent="Theme.Material3.DayNight.Dialog.Alert">
+        <item name="android:backgroundTint">@color/primary_variant</item>
         <item name="android:textColor">@color/primary_on</item>
-        <item name="android:background">@color/primary_variant</item>
+        <item name="android:gravity">center_horizontal</item>
     </style>
 
 </resources>

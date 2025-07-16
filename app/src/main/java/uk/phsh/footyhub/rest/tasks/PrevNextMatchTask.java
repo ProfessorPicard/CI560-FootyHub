@@ -60,35 +60,37 @@ public class PrevNextMatchTask extends BaseTask<Match> {
      */
     private Match parseMatch(String json, FixtureType type) {
         JsonObject baseObject = getBaseObject(json);
-        JsonArray matches = baseObject.getAsJsonArray("matches");
+        JsonArray matches = returnDefaultNullArray(baseObject.get("matches"));
         Match m = new Match();
         if(!matches.isEmpty()) {
-            JsonObject matchObject = matches.get(0).getAsJsonObject();
-            JsonObject compObject = matchObject.getAsJsonObject("competition");
-            m.leagueID = compObject.get("id").getAsInt();
-            m.leagueEmblem = compObject.get("emblem").getAsString();
-            m.leagueName = compObject.get("name").getAsString();
+            JsonObject matchObject = returnDefaultNullObj(matches.get(0));
+            JsonObject compObject = returnDefaultNullObj(matchObject.get("competition"));
+            m.leagueID = returnDefaultNullInt(compObject.get("id"));
+            m.leagueEmblem = returnDefaultNullString(compObject.get("emblem"));
+            m.leagueName = returnDefaultNullString(compObject.get("name"));
 
-            m.matchID = matchObject.get("id").getAsInt();
+            m.matchID = returnDefaultNullInt(matchObject.get("id"));
 
-            String utcDate = matchObject.get("utcDate").getAsString();
+            String utcDate = returnDefaultNullString(matchObject.get("utcDate"));
             m.matchDate = dateTimeString(utcDate, DateTimeType.DATE);
             m.matchTime = dateTimeString(utcDate, DateTimeType.TIME);
             m.epochTime = dateTimeString(utcDate, DateTimeType.EPOCH);
 
             m.matchType = type;
 
-            JsonObject homeObject = matchObject.getAsJsonObject("homeTeam");
+            JsonObject homeObject = returnDefaultNullObj(matchObject.get("homeTeam"));
             m.homeTeam = getGson().fromJson(homeObject.toString(), Team.class);
-            JsonObject awayObject = matchObject.getAsJsonObject("awayTeam");
+            JsonObject awayObject = returnDefaultNullObj(matchObject.get("awayTeam"));
             m.awayTeam = getGson().fromJson(awayObject.toString(), Team.class);
 
             if(type == FixtureType.FINISHED) {
-                JsonObject score = matchObject.getAsJsonObject("score");
-                JsonObject halfTime = score.getAsJsonObject("halfTime");
-                Score halfScore = new Score(halfTime.get("home").getAsInt(), halfTime.get("away").getAsInt());
-                JsonObject fullTime = score.getAsJsonObject("fullTime");
-                Score fullScore = new Score(fullTime.get("home").getAsInt(), fullTime.get("away").getAsInt());
+                JsonObject score = returnDefaultNullObj(matchObject.get("score"));
+                JsonObject halfTime = returnDefaultNullObj(score.get("halfTime"));
+                Score halfScore = new Score(returnDefaultNullInt(halfTime.get("home")),
+                        returnDefaultNullInt(halfTime.get("away")));
+                JsonObject fullTime = returnDefaultNullObj(score.get("fullTime"));
+                Score fullScore = new Score(returnDefaultNullInt(fullTime.get("home")),
+                        returnDefaultNullInt(fullTime.get("away")));
                 m.halfTime = halfScore;
                 m.fullTime = fullScore;
             }

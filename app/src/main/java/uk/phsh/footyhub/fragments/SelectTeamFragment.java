@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.GridView;
 import androidx.preference.PreferenceManager;
 import com.google.gson.Gson;
@@ -73,7 +74,7 @@ public class SelectTeamFragment extends BaseFragment implements I_TaskCallback<A
                     editor.putBoolean("favouriteTeamSelected", true);
                     editor.putInt("favouriteTeamID", _favouriteTeam.id);
                     editor.apply();
-                    requireActivity().recreate();
+                    SelectTeamFragment.this.requireActivity().recreate();
                     break;
                 case DialogInterface.BUTTON_NEGATIVE:
                     _favouriteTeam = null;
@@ -87,19 +88,25 @@ public class SelectTeamFragment extends BaseFragment implements I_TaskCallback<A
         _teamGridView.setOnItemClickListener((parent, view, position, id) -> {
             _favouriteTeam = availableTeams.get(position);
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setMessage(getString(R.string.selectFavTeam,_favouriteTeam.shortName))
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AlertDialogCustom);
+            AlertDialog dialog = builder.setMessage(getString(R.string.selectFavTeam,_favouriteTeam.shortName))
                     .setPositiveButton("Yes", dialogClickListener)
-                    .setNegativeButton("No", dialogClickListener)
-                    .show();
+                    .setNegativeButton("No", dialogClickListener).show();
+
+            Button positive = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+            positive.setTextColor(getResources().getColor(R.color.primary_on, null));
+
+            Button negative = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+            negative.setTextColor(getResources().getColor(R.color.primary_on, null));
+
         });
 
         String teamsStr = PreferenceManager.getDefaultSharedPreferences(requireActivity()).getString("availableTeams", "");
 
         if(teamsStr.isEmpty()) {
             RestManager rm = RestManager.getInstance(requireActivity().getCacheDir());
-            rm.asyncTask(new LeagueTeamsTask(LeagueEnum.PREMIER_LEAGUE, this));
-            rm.asyncTask(new LeagueTeamsTask(LeagueEnum.CHAMPIONSHIP, this));
+            rm.asyncTask(new LeagueTeamsTask(this, LeagueEnum.PREMIER_LEAGUE));
+            rm.asyncTask(new LeagueTeamsTask(this, LeagueEnum.CHAMPIONSHIP));
         } else {
             Gson gson = new Gson();
             JsonElement element = JsonParser.parseString(teamsStr);

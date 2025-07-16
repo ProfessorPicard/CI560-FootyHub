@@ -19,6 +19,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:listitem="@layout/card_item" />
+        tools:listitem="@layout/select_team_card" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

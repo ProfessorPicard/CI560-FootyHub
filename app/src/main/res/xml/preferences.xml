@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen
+<androidx.preference.PreferenceScreen
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory
@@ -40,18 +40,29 @@
             app:summary="Show news articles on home screen"
             app:defaultValue="true" />
 
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:title="Debug Settings">
+
         <Preference
             app:title="Favourite Team ID"
-            app:key="favouriteTeamID" />
+            app:key="favouriteTeamID"
+            app:summary="@string/prefTeamIdSummaryDefault"
+            app:defaultValue="-1"/>
 
         <Preference
             app:title="Favourite Team Name"
-            app:key="favouriteTeamName"/>
+            app:key="favouriteTeamName"
+            app:summary="@string/prefTeamNameSummaryDefault"
+            app:defaultValue="" />
 
         <Preference
             app:title="Favourite Team Logo"
-            app:key="favouriteTeamLogo" />
-
+            app:key="favouriteTeamLogo"
+            app:summary="@string/prefTeamLogoSummaryDefault"
+            app:defaultValue="" />
     </PreferenceCategory>
 
-</PreferenceScreen>
+
+</androidx.preference.PreferenceScreen>

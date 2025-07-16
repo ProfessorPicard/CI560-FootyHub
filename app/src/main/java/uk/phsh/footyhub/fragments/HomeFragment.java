@@ -101,10 +101,10 @@ public class HomeFragment extends BaseFragment {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(requireActivity());
         int teamID = prefs.getInt("favouriteTeamID", -1);
         String teamName = prefs.getString("favouriteTeamName", "");
-        boolean showDetails = prefs.getBoolean("showDetails", false);
-        boolean showPrevResult = prefs.getBoolean("showPrev", false);
-        boolean showNextFixture = prefs.getBoolean("showNext", false);
-        boolean showNews = prefs.getBoolean("showNews", false);
+        boolean showDetails = prefs.getBoolean("showDetails", true);
+        boolean showPrevResult = prefs.getBoolean("showPrev", true);
+        boolean showNextFixture = prefs.getBoolean("showNext", true);
+        boolean showNews = prefs.getBoolean("showNews", true);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -215,7 +215,7 @@ public class HomeFragment extends BaseFragment {
                     @Override
                     public void onError(String message) {
                         UtilityHelper.getInstance().runOnUiThread(_context, () -> {
-                            System.out.println(message);
+
                         });
                     }
                 };

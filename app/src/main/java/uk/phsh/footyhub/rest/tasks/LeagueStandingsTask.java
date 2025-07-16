@@ -47,20 +47,20 @@ public class LeagueStandingsTask extends BaseTask<LeagueStanding> {
         LeagueStanding leagueStandings = new LeagueStanding();
         JsonObject baseObject = getBaseObject(response.getResponseBody());
 
-        JsonArray standings = baseObject.getAsJsonArray("standings");
-        JsonObject season = baseObject.getAsJsonObject("season");
-        JsonObject comp = baseObject.getAsJsonObject("competition");
+        JsonArray standings = returnDefaultNullArray(baseObject.get("standings"));
+        JsonObject season = returnDefaultNullObj(baseObject.get("season"));
+        JsonObject comp = returnDefaultNullObj(baseObject.get("competition"));
 
         LeagueInfo info = new LeagueInfo();
-        info.emblem = comp.get("emblem").getAsString();
-        info.name = comp.get("name").getAsString();
-        info.startDate = season.get("startDate").getAsString();
-        info.endDate = season.get("endDate").getAsString();
-        info.matchDay= season.get("currentMatchday").getAsInt();
+        info.emblem = returnDefaultNullString(comp.get("emblem"));
+        info.name = returnDefaultNullString(comp.get("name"));
+        info.startDate = returnDefaultNullString(season.get("startDate"));
+        info.endDate = returnDefaultNullString(season.get("endDate"));
+        info.matchDay= returnDefaultNullInt(season.get("currentMatchday"));
 
         leagueStandings.setLeagueInfo(info);
 
-        JsonArray table = standings.get(0).getAsJsonObject().getAsJsonArray("table");
+        JsonArray table = returnDefaultNullArray(returnDefaultNullObj(standings.get(0)).get("table"));
 
         for(JsonElement teamElement : table) {
             PositionInfo positionInfo = getGson().fromJson(teamElement.toString(), PositionInfo.class);

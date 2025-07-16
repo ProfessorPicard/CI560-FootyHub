@@ -3,4 +3,5 @@
     <color name="primary">#E3E3E3</color>
     <color name="primary_variant">#FFFFFF</color>
     <color name="primary_on">#0f031d</color>
+    <color name="icon_back">#0f031d</color>
 </resources>

@@ -42,6 +42,9 @@
     <string name="prefTeamNameSummary">Favourite Team Name: %1$s</string>
     <string name="prefTeamLogoSummary">Favourite Team Logo: %1$s</string>
     <string name="prefTeamIdSummary">Favourite Team ID: %1$d</string>
+    <string name="prefTeamNameSummaryDefault">Favourite Team Name:</string>
+    <string name="prefTeamLogoSummaryDefault">Favourite Team Logo:</string>
+    <string name="prefTeamIdSummaryDefault">Favourite Team ID:</string>
 
     <!-- Standings Strings -->
     <string name="standingsHeader">Standings</string>

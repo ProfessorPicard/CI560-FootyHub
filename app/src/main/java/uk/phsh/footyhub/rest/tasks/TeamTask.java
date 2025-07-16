@@ -32,17 +32,17 @@ public class TeamTask extends BaseTask<Team> {
         Team team = new Team();
         JsonObject baseObject = getBaseObject(response.getResponseBody());
 
-        team.id = baseObject.get("id").getAsInt();
-        team.shortName = baseObject.get("shortName").getAsString();
-        team.name = baseObject.get("name").getAsString();
-        team.tla = baseObject.get("tla").getAsString();
-        team.crest = baseObject.get("crest").getAsString();
-        team.address = baseObject.get("address").getAsString();
-        team.founded = baseObject.get("founded").getAsInt();
-        team.venue = baseObject.get("venue").getAsString();
+        team.id = returnDefaultNullInt(baseObject.get("id"));
+        team.shortName = returnDefaultNullString(baseObject.get("shortName"));
+        team.name = returnDefaultNullString(baseObject.get("name"));
+        team.tla = returnDefaultNullString(baseObject.get("tla"));
+        team.crest = returnDefaultNullString(baseObject.get("crest"));
+        team.address = returnDefaultNullString(baseObject.get("address"));
+        team.founded = returnDefaultNullInt(baseObject.get("founded"));
+        team.venue = returnDefaultNullString(baseObject.get("venue"));
 
-        JsonObject coachObject = baseObject.getAsJsonObject("coach");
-        team.coach = coachObject.get("name").getAsString();
+        JsonObject coachObject = returnDefaultNullObj(baseObject.get("coach"));
+        team.coach = returnDefaultNullString(coachObject.get("name"));
 
         getCallback().onSuccess(team);
     }

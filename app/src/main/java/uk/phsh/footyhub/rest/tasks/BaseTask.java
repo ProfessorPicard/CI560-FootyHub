@@ -1,8 +1,7 @@
 package uk.phsh.footyhub.rest.tasks;
 
-import android.util.Log;
-
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -92,8 +91,6 @@ public abstract class BaseTask<T> implements Callable<RestResponse>, I_RestRespo
      */
     public RestResponse call() throws Exception {
 
-        Log.e(getTag(), getUrl());
-
         Request request = new Request.Builder()
                 .url(getUrl())
                 .headers(getHeaders())
@@ -122,7 +119,7 @@ public abstract class BaseTask<T> implements Callable<RestResponse>, I_RestRespo
 
     protected JsonObject getBaseObject(String json) {
         JsonElement element = JsonParser.parseString(json);
-        return element.getAsJsonObject();
+        return returnDefaultNullObj(element);
     }
 
     /**
@@ -166,6 +163,22 @@ public abstract class BaseTask<T> implements Callable<RestResponse>, I_RestRespo
         LocalDateTime dateTime = LocalDateTime.ofEpochSecond(Long.parseLong(epochTime), 0, ZoneOffset.UTC);
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
         return dateTime.format(dtf);
+    }
+
+    protected String returnDefaultNullString(JsonElement element) {
+        return (element.isJsonNull()) ? "" : element.getAsString();
+    }
+
+    protected int returnDefaultNullInt(JsonElement element) {
+        return (element.isJsonNull()) ? 0 : element.getAsInt();
+    }
+
+    protected JsonObject returnDefaultNullObj(JsonElement element) {
+        return (element.isJsonNull()) ? new JsonObject() : element.getAsJsonObject();
+    }
+
+    protected JsonArray returnDefaultNullArray(JsonElement element) {
+        return (element.isJsonNull()) ? new JsonArray() : element.getAsJsonArray();
     }
 
 }

@@ -5,10 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
-
 import uk.phsh.footyhub.R;
 import uk.phsh.footyhub.rest.enums.LeagueEnum;
 
@@ -28,7 +27,7 @@ public class LeagueSpinnerAdapter extends ArrayAdapter<LeagueEnum> {
 
     @Override
     public View getDropDownView(int position, View convertView, @NonNull ViewGroup parent) {
-        return getCustomView(position, parent);
+        return getCustomView(position, parent, false);
     }
 
     /**
@@ -46,13 +45,16 @@ public class LeagueSpinnerAdapter extends ArrayAdapter<LeagueEnum> {
     @NonNull
     @Override
     public View getView(int position, View convertView, @NonNull ViewGroup parent) {
-        return getCustomView(position, parent);
+        return getCustomView(position, parent, true);
     }
 
-    private View getCustomView(final int position, ViewGroup parent) {
+    private View getCustomView(final int position, ViewGroup parent, boolean showIcon) {
         View row = LayoutInflater.from(parent.getContext()).inflate(R.layout.spinner_row, parent, false);
         LeagueEnum leagueEnum = getItem(position);
-        final TextView value = row.findViewById(R.id.spinnerRowTxt);
+        TextView value = row.findViewById(R.id.spinnerRowTxt);
+        ImageView icon = row.findViewById(R.id.spinnerRowImg);
+        icon.setVisibility((showIcon) ? View.VISIBLE : View.GONE);
+
         assert leagueEnum != null;
         value.setText(leagueEnum.getReadableName());
         return row;

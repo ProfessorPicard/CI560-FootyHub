@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:padding="10dp"
     android:id="@+id/fixtureContainer"
-    android:background="@drawable/layout_curved"
+    android:background="@color/primary_variant"
     android:orientation="vertical">
 
     <LinearLayout

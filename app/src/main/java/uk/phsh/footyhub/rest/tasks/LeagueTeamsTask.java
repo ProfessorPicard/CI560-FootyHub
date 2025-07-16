@@ -20,7 +20,7 @@ public class LeagueTeamsTask extends BaseTask<ArrayList<Team>> {
     /**
      * @param league The LeagueEnum to retrieve teams for
      */
-    public LeagueTeamsTask(LeagueEnum league, I_TaskCallback<ArrayList<Team>> callback) {
+    public LeagueTeamsTask(I_TaskCallback<ArrayList<Team>> callback, LeagueEnum league) {
         super(callback);
         this.selectedLeague = league;
     }
@@ -45,19 +45,19 @@ public class LeagueTeamsTask extends BaseTask<ArrayList<Team>> {
     public void onSuccess(RestResponse response) {
         ArrayList<Team> teams = new ArrayList<>();
         JsonObject baseObject = getBaseObject(response.getResponseBody());
-        JsonArray teamsArray = baseObject.getAsJsonArray("teams");
+        JsonArray teamsArray = returnDefaultNullArray(baseObject.get("teams"));
 
         for(JsonElement teamElement : teamsArray) {
-            JsonObject teamObject = teamElement.getAsJsonObject();
+            JsonObject teamObject = returnDefaultNullObj(teamElement);
             Team team = new Team();
-            team.id = teamObject.get("id").getAsInt();
-            team.shortName = teamObject.get("shortName").getAsString();
-            team.name = teamObject.get("name").getAsString();
-            team.tla = teamObject.get("tla").getAsString();
-            team.crest = teamObject.get("crest").getAsString();
-            team.address = teamObject.get("address").getAsString();
-            team.founded = teamObject.get("founded").getAsInt();
-            team.venue = teamObject.get("venue").getAsString();
+            team.id = returnDefaultNullInt(teamObject.get("id"));
+            team.shortName = returnDefaultNullString(teamObject.get("shortName"));
+            team.name = returnDefaultNullString(teamObject.get("name"));
+            team.tla = returnDefaultNullString(teamObject.get("tla"));
+            team.crest = returnDefaultNullString(teamObject.get("crest"));
+            team.address = returnDefaultNullString(teamObject.get("address"));
+            team.founded = returnDefaultNullInt(teamObject.get("founded"));
+            team.venue = returnDefaultNullString(teamObject.get("venue"));
             teams.add(team);
         }
         getCallback().onSuccess(teams);
