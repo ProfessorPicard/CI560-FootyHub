@@ -18,20 +18,18 @@ public class FixturesTask extends BaseTask<CompetitionFixtures> {
 
     private final LeagueEnum _league;
     private final int _matchWeek;
-    private final int _seasonYear;
     /**
      * @param callback Generic callback to be used to receive responses
      */
-    public FixturesTask(I_TaskCallback<CompetitionFixtures> callback, LeagueEnum league, int seasonYear, int matchWeek) {
+    public FixturesTask(I_TaskCallback<CompetitionFixtures> callback, LeagueEnum league, int matchWeek) {
         super(callback);
         this._league = league;
         this._matchWeek = matchWeek;
-        this._seasonYear = seasonYear;
     }
 
     @Override
     public String getUrl() {
-        return baseUrl + "competitions/" + _league.getLeagueCode() + "/matches?" + ((_seasonYear <= 0) ? "" : "season=" + _seasonYear) + ((_matchWeek <= 0) ? "" : "&matchday=" + _matchWeek);
+        return baseUrl + "competitions/" + _league.getLeagueCode() + "/matches?" + ((_matchWeek <= 0) ? "" : "matchday=" + _matchWeek);
     }
 
     @Override

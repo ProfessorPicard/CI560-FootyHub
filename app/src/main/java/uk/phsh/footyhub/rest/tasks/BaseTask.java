@@ -1,5 +1,7 @@
 package uk.phsh.footyhub.rest.tasks;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -89,6 +91,8 @@ public abstract class BaseTask<T> implements Callable<RestResponse>, I_RestRespo
      * @throws Exception Throws an exception when something is wrong
      */
     public RestResponse call() throws Exception {
+
+        Log.e(getTag(), getUrl());
 
         Request request = new Request.Builder()
                 .url(getUrl())

@@ -10,7 +10,7 @@ import android.widget.Spinner;
 import java.util.ArrayList;
 import uk.phsh.footyhub.R;
 import uk.phsh.footyhub.adapters.StandingsListViewAdapter;
-import uk.phsh.footyhub.adapters.StandingsSpinnerAdapter;
+import uk.phsh.footyhub.adapters.LeagueSpinnerAdapter;
 import uk.phsh.footyhub.helpers.UtilityHelper;
 import uk.phsh.footyhub.interfaces.I_FragmentCallback;
 import uk.phsh.footyhub.rest.RestManager;
@@ -60,7 +60,7 @@ public class StandingsFragment extends BaseFragment implements I_TaskCallback<Le
         _standingsList.setAdapter(_adapter);
 
         Spinner _standingsSpinner = requireActivity().findViewById(R.id.standingsSpinner);
-        StandingsSpinnerAdapter _spinnerAdapter = new StandingsSpinnerAdapter(getActivity(), LeagueEnum.values());
+        LeagueSpinnerAdapter _spinnerAdapter = new LeagueSpinnerAdapter(getActivity(), LeagueEnum.values());
         _standingsSpinner.setAdapter(_spinnerAdapter);
         _standingsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

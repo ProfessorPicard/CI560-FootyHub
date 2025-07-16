@@ -9,23 +9,10 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-<!--    <TextView-->
-<!--        android:id="@+id/standingsHeader"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="@string/standingsHeader"-->
-<!--        android:gravity="center"-->
-<!--        android:textSize="24sp"-->
-<!--        android:padding="5dp"-->
-<!--        android:textColor="@color/standingsTitleFont"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent" />-->
-
     <Spinner
         android:id="@+id/standingsSpinner"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:background="@color/primary_variant"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"

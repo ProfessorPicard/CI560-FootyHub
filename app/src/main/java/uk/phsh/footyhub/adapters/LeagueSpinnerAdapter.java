@@ -16,13 +16,13 @@ import uk.phsh.footyhub.rest.enums.LeagueEnum;
  * ArrayAdapter for the League Spinner on standings fragment
  * @author Peter Blackburn
  */
-public class StandingsSpinnerAdapter extends ArrayAdapter<LeagueEnum> {
+public class LeagueSpinnerAdapter extends ArrayAdapter<LeagueEnum> {
 
     /**
      * @param context Application context
      * @param enums Array of LeagueEnums to display
      */
-    public StandingsSpinnerAdapter(Context context, LeagueEnum[] enums) {
+    public LeagueSpinnerAdapter(Context context, LeagueEnum[] enums) {
         super(context, 0, enums);
     }
 
