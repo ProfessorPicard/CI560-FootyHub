@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/primary"
+        android:gravity="center">
+
+        <Spinner
+            android:id="@+id/fixtureFilterLeague"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:background="@color/primary_variant"
+            android:layout_marginBottom="10dp" />
+
+        <LinearLayout
+            android:layout_below="@+id/fixtureFilterLeague"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_height="50dp">
+
+            <TextView
+                android:id="@+id/fixtureFilterLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:labelFor="@+id/fixtureFilterMatchweek"
+                android:layout_marginEnd="20dp"
+                android:gravity="center"
+                android:text="@string/filterMatchweekHeader" />
+
+            <EditText
+                android:id="@+id/fixtureFilterMatchweek"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:autofillHints="Matchweek"
+                android:layout_marginEnd="20dp"
+                android:gravity="center"
+                android:background="@color/primary_variant"
+                android:digits="0123456789"
+                android:imeOptions="actionDone"
+                android:inputType="number" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/fixtureFilterButton"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:minHeight="0dp"
+                android:minWidth="0dp"
+                android:paddingEnd="10dp"
+                android:paddingStart="10dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:layout_margin="0dp"
+                android:text="@string/filterButtonText"
+                android:backgroundTint="@color/primary_variant"
+                app:cornerRadius="0dp" />
+
+        </LinearLayout>
+
+
+
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="200dp"
+        android:id="@+id/fixtureRecycler">
+
+
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

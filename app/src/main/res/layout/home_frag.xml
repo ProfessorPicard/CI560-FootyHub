@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:padding="10dp">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:id="@+id/teamDetailsContainer"
+            android:visibility="gone"
+            app:cardUseCompatPadding="false"
+            app:cardElevation="5dp"
+            app:cardMaxElevation="5dp"
+            android:layout_marginBottom="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/primary_variant"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:id="@+id/teamDetailsImg"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:contentDescription="@string/teamLogoContent"
+                    android:scaleType="fitCenter"
+                    android:layout_marginEnd="10dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|start"
+                        android:paddingBottom="10dp">
+
+                        <TextView
+                            android:id="@+id/venueHeaderTxt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/venueHeader"
+                            android:textColor="@color/primary_on"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/roboto_bold"
+                            android:gravity="center_vertical|start"
+                            android:layout_marginEnd="20dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentStart="true" />
+
+                        <TextView
+                            android:id="@+id/venueTxt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/primary_on"
+                            android:fontFamily="@font/roboto_light"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_toEndOf="@+id/venueHeaderTxt"
+                            android:gravity="center_vertical|start" />
+
+                    </RelativeLayout>
+
+
+                    <TextView
+                        android:id="@+id/addressTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/primary_on"
+                        android:gravity="center_vertical|start"
+                        android:paddingBottom="10dp" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|start"
+                        android:paddingBottom="10dp">
+
+                        <TextView
+                            android:id="@+id/foundedHeaderTxt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/foundedHeader"
+                            android:textColor="@color/primary_on"
+                            android:fontFamily="@font/roboto_bold"
+                            android:textStyle="bold"
+                            android:gravity="center_vertical|start"
+                            android:layout_marginEnd="10dp"
+                            android:layout_alignParentStart="true" />
+
+                        <TextView
+                            android:id="@+id/foundedTxt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/primary_on"
+                            android:fontFamily="@font/roboto_light"
+                            android:layout_alignParentEnd="true"
+                            android:layout_toEndOf="@+id/foundedHeaderTxt"
+                            android:gravity="center_vertical|start" />
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|start">
+
+                        <TextView
+                            android:id="@+id/coachHeaderTxt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/coachHeader"
+                            android:textColor="@color/primary_on"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/roboto_bold"
+                            android:gravity="center_vertical|start"
+                            android:layout_marginEnd="10dp"
+                            android:layout_alignParentStart="true" />
+
+                        <TextView
+                            android:id="@+id/coachTxt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/primary_on"
+                            android:fontFamily="@font/roboto_light"
+                            android:layout_alignParentEnd="true"
+                            android:layout_toEndOf="@+id/coachHeaderTxt"
+                            android:gravity="center_vertical|start" />
+
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Custom control for displaying fixtures on the homepage   -->
+        <uk.phsh.footyhub.controls.FixtureControl
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:foregroundGravity="center"
+            android:id="@+id/nextFixtureContainer"
+            android:visibility="gone"
+            app:Type="SCHEDULED"
+            app:Header="@string/nextFixtureHeader"
+            app:cardUseCompatPadding="false"
+            android:elevation="5dp"
+            app:cardMaxElevation="5dp"
+            android:layout_marginBottom="10dp" />
+
+        <!-- Custom control for displaying fixtures on the homepage   -->
+        <uk.phsh.footyhub.controls.FixtureControl
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:foregroundGravity="center"
+            android:id="@+id/previousFixtureContainer"
+            android:visibility="gone"
+            app:Type="FINISHED"
+            app:Header="@string/prevFixtureHeader"
+            app:cardUseCompatPadding="false"
+            android:elevation="5dp"
+            app:cardMaxElevation="5dp"
+            android:layout_marginBottom="10dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:elevation="5dp"
+            android:visibility="visible"
+            android:background="@color/primary_variant"
+            android:id="@+id/newsContainer"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/newsArticleHeader"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/roboto_bold"
+                android:textColor="@color/primary_on"
+                android:layout_marginBottom="10dp"
+                android:gravity="start|center_vertical"
+                android:background="@color/primary_variant"
+                android:text="@string/newsArticleHeader"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/smallNewsRecycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.core.widget.NestedScrollView>

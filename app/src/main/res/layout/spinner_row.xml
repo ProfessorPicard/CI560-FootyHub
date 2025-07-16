@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="50dp"
+    android:padding="10dp"
+    android:background="@color/primary_variant">
+
+    <TextView
+        android:id="@+id/spinnerRowTxt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textColor="@color/primary_on"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:gravity="center_vertical|start"
+        android:layout_marginEnd="20dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_toStartOf="@+id/spinnerRowImg"/>
+
+    <ImageView
+        android:id="@+id/spinnerRowImg"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:contentDescription="@string/standingsDropDownImg"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/down"/>
+
+</RelativeLayout>

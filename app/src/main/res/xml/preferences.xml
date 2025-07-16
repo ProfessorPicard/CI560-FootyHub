@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        app:title="Theme Settings">
+
+        <CheckBoxPreference
+            app:title="Dark Mode"
+            app:key="darkMode"
+            app:summary="Enable / Disable Dark Mode"
+            app:defaultValue="false" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:title="Favourites Settings">
+
+        <SwitchPreference
+            app:title="Show Team Details"
+            app:key="showDetails"
+            app:summary="Show team details on home screen"
+            app:defaultValue="true" />
+
+        <SwitchPreference
+            app:title="Show Previous Result"
+            app:key="showPrev"
+            app:summary="Show previous result on home screen (if previous result exists)"
+            app:defaultValue="true" />
+
+        <SwitchPreference
+            app:title="Show Next Fixture"
+            app:key="showNext"
+            app:summary="Show next fixture on home screen (if next fixture exists)"
+            app:defaultValue="true" />
+
+        <SwitchPreference
+            app:title="Show News Articles"
+            app:key="showNews"
+            app:summary="Show news articles on home screen"
+            app:defaultValue="true" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:title="Debug Settings">
+
+        <Preference
+            app:title="Favourite Team ID"
+            app:key="favouriteTeamID"
+            app:summary="@string/prefTeamIdSummaryDefault"
+            app:defaultValue="-1"/>
+
+        <Preference
+            app:title="Favourite Team Name"
+            app:key="favouriteTeamName"
+            app:summary="@string/prefTeamNameSummaryDefault"
+            app:defaultValue="" />
+
+        <Preference
+            app:title="Favourite Team Logo"
+            app:key="favouriteTeamLogo"
+            app:summary="@string/prefTeamLogoSummaryDefault"
+            app:defaultValue="" />
+    </PreferenceCategory>
+
+
+</androidx.preference.PreferenceScreen>

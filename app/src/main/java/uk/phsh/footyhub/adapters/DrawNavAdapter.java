@@ -7,9 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import java.util.ArrayList;
-
 import uk.phsh.footyhub.R;
 import uk.phsh.footyhub.models.NavItem;
 

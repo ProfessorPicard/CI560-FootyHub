@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="FixtureControl">
+        <attr name="Type" format="enum">
+            <enum name="SCHEDULED" value="0"/>
+            <enum name="FINISHED" value="1"/>
+        </attr>
+
+        <attr name="ShowError" format="boolean" />
+        <attr name="Title" format="string" />
+        <attr name="HomeImgSrc" format="string" />
+        <attr name="AwayImgSrc" format="string" />
+        <attr name="HomeScore" format="integer" />
+        <attr name="AwayScore" format="integer" />
+        <attr name="FixtureDate" format="string" />
+        <attr name="FixtureTime" format="string" />
+        <attr name="ErrorMessage" format="string" />
+        <attr name="Header" format="string" />
+
+    </declare-styleable>
+</resources>

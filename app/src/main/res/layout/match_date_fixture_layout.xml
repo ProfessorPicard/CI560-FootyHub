@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:padding="0dp"
+    android:layout_margin="0dp"
+    android:orientation="horizontal"
+    android:useDefaultMargins="false"
+    android:columnCount="3"
+    android:rowCount="1">
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_columnWeight="1">
+
+        <TextView
+            android:id="@+id/matchDateFixtureHomeTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/roboto_regular"
+            android:gravity="end|center_vertical"
+            android:layout_toStartOf="@+id/matchDateFixtureHomeImg"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:lines="1"
+            android:maxLines="1"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/primary_on" />
+
+        <ImageView
+            android:id="@+id/matchDateFixtureHomeImg"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentEnd="true"
+            android:scaleType="fitCenter" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_columnWeight="0.5"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp">
+
+        <TextView
+            android:id="@+id/matchDateFixtureTime"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/roboto_regular"
+            android:textColor="@color/primary_on"
+            android:gravity="center"
+            android:visibility="gone"
+            android:background="@color/primary" />
+
+        <TextView
+            android:id="@+id/matchDateFixtureScore"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/roboto_regular"
+            android:textColor="@color/primary_on"
+            android:gravity="center"
+            android:visibility="gone"
+            android:background="@color/primary" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:padding="0dp"
+        android:layout_margin="0dp"
+        android:layout_columnWeight="1">
+
+        <ImageView
+            android:id="@+id/matchDateFixtureAwayImg"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:scaleType="centerInside"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/matchDateFixtureAwayTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/roboto_regular"
+            android:textColor="@color/primary_on"
+            android:gravity="start|center_vertical"
+            android:lines="1"
+            android:maxLines="1"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@+id/matchDateFixtureAwayImg"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true" />
+
+    </RelativeLayout>
+
+</GridLayout>
