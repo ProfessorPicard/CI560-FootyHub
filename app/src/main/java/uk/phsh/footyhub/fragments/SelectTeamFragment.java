@@ -74,7 +74,7 @@ public class SelectTeamFragment extends BaseFragment implements I_TaskCallback<A
                     editor.putBoolean("favouriteTeamSelected", true);
                     editor.putInt("favouriteTeamID", _favouriteTeam.id);
                     editor.apply();
-                    SelectTeamFragment.this.requireActivity().recreate();
+                    requireActivity().recreate();
                     break;
                 case DialogInterface.BUTTON_NEGATIVE:
                     _favouriteTeam = null;
