@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements I_FragmentCallbac
     @Override
     public void recreate() {
         super.recreate();
+        setup(true);
     }
 
     @Override
@@ -158,7 +159,6 @@ public class MainActivity extends AppCompatActivity implements I_FragmentCallbac
 
     private void changeFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
-
         fragmentManager.beginTransaction()
                 .replace(R.id.mainContent, fragment)
                 .commit();
@@ -181,21 +181,9 @@ public class MainActivity extends AppCompatActivity implements I_FragmentCallbac
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, @Nullable String key) {
-        switch (Objects.requireNonNull(key)) {
-            case "darkMode":
-                _darkMode = sharedPreferences.getBoolean(key, false);
-                setDarkMode();
-                break;
-            case "favouriteTeamSelected":
-                if(!sharedPreferences.getBoolean(key, false)) {
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString("favouriteTeamName", "");
-                    editor.putString("favouriteTeamNameLong", "");
-                    editor.putString("favouriteTeamLogo", "");
-                    editor.putInt("favouriteTeamID", -1);
-                    editor.apply();
-                }
-                break;
+        if (Objects.requireNonNull(key).equals("darkMode")) {
+            _darkMode = sharedPreferences.getBoolean(key, false);
+            setDarkMode();
         }
     }
 
