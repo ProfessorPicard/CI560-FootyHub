@@ -17,13 +17,13 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.PreferenceManager;
 import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.Objects;
 import uk.phsh.footyhub.adapters.DrawNavAdapter;
-import uk.phsh.footyhub.fragments.BaseFragment;
 import uk.phsh.footyhub.fragments.FixtureFragment;
 import uk.phsh.footyhub.fragments.HomeFragment;
 import uk.phsh.footyhub.fragments.NewsFragment;
@@ -35,7 +35,6 @@ import uk.phsh.footyhub.models.NavItem;
 
 public class MainActivity extends AppCompatActivity implements I_FragmentCallback, SharedPreferences.OnSharedPreferenceChangeListener {
 
-    private SettingsFragment _settingsFragment;
     private ListView _navDrawerList;
     private RelativeLayout _drawContainer;
     private ActionBarDrawerToggle _drawerToggle;
@@ -52,10 +51,10 @@ public class MainActivity extends AppCompatActivity implements I_FragmentCallbac
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setup();
+        setup(savedInstanceState == null);
     }
 
-    private void setup() {
+    private void setup(boolean loadDefaultFrag) {
         PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this);
 
         _darkMode = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("darkMode", false);
@@ -68,14 +67,14 @@ public class MainActivity extends AppCompatActivity implements I_FragmentCallbac
         NewsFragment _newsFragment = new NewsFragment(this);
         FixtureFragment _fixturesFragment = new FixtureFragment(this);
         StandingsFragment _standingsFragment = new StandingsFragment(this);
-        _settingsFragment = new SettingsFragment(this);
+        SettingsFragment _settingsFragment = new SettingsFragment(this);
 
         _navItems.add(new NavItem(getResources().getString(R.string.change_favourite_drawer_menu), R.drawable.change, _selectTeamFragment));
         _navItems.add(new NavItem(getResources().getString(R.string.home_drawer_menu), R.drawable.home, _homeFragment));
         _navItems.add(new NavItem(getResources().getString(R.string.team_news_drawer_menu), R.drawable.news, _newsFragment));
         _navItems.add(new NavItem(getResources().getString(R.string.fixtures_drawer_menu), R.drawable.event, _fixturesFragment));
         _navItems.add(new NavItem(getResources().getString(R.string.standings_drawer_menu), R.drawable.standings, _standingsFragment));
-        _navItems.add(new NavItem(getResources().getString(R.string.settings_drawer_menu), R.drawable.settings, null));
+        _navItems.add(new NavItem(getResources().getString(R.string.settings_drawer_menu), R.drawable.settings, _settingsFragment));
 
         _drawerLayout = findViewById(R.id.drawerLayout);
         _drawContainer  = findViewById(R.id.drawerContainer);
@@ -118,23 +117,26 @@ public class MainActivity extends AppCompatActivity implements I_FragmentCallbac
 
         if(!favTeamSelected) {
             _selectedTeamContainer.setVisibility(View.GONE);
-            changeFragment(_selectTeamFragment);
+            if(loadDefaultFrag)
+                changeFragment(_selectTeamFragment);
         } else {
             String teamLogo = prefs.getString("favouriteTeamLogo", "");
             _selectedTeamTxt.setText(prefs.getString("favouriteTeamName", ""));
             Picasso.get().load(teamLogo).into(_selectedTeamImg);
             _selectedTeamContainer.setVisibility(View.VISIBLE);
-            changeFragment(_homeFragment);
+            if(loadDefaultFrag)
+                changeFragment(_homeFragment);
         }
 
     }
 
     private void selectItemFromDrawer(int position) {
-        BaseFragment fragment = _navItems.get(position).getFragment();
+        NavItem item = _navItems.get(position);
+        Fragment fragment = item.getFragment();
         changeFragment(fragment);
 
         _navDrawerList.setItemChecked(position, true);
-        setTitle(_navItems.get(position).getTitle());
+        setTitle(item.getTitle());
 
         _drawerLayout.closeDrawer(_drawContainer);
     }
@@ -154,11 +156,11 @@ public class MainActivity extends AppCompatActivity implements I_FragmentCallbac
         _drawerToggle.syncState();
     }
 
-    private void changeFragment(BaseFragment fragment) {
+    private void changeFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
 
         fragmentManager.beginTransaction()
-                .replace(R.id.mainContent, (fragment == null) ? _settingsFragment : fragment)
+                .replace(R.id.mainContent, fragment)
                 .commit();
     }
 

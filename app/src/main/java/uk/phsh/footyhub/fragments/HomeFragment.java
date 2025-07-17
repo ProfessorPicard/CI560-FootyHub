@@ -134,7 +134,7 @@ public class HomeFragment extends BaseFragment {
                         requireActivity().runOnUiThread(() -> teamDetailsContainer.setVisibility(View.GONE));
                     }
                 };
-                rm.asyncTask(new TeamTask(teamID, teamCallback));
+                rm.submitTask(new TeamTask(teamID, teamCallback));
             } else {
                 teamDetailsContainer.setVisibility(View.GONE);
             }
@@ -162,7 +162,7 @@ public class HomeFragment extends BaseFragment {
                         });
                     }
                 };
-                rm.asyncTask(new PrevNextMatchTask(teamID, FixtureType.SCHEDULED, nextCallback));
+                rm.submitTask(new PrevNextMatchTask(teamID, FixtureType.SCHEDULED, nextCallback));
             } else {
                 nextFixtureContainer.setVisibility(View.GONE);
             }
@@ -192,7 +192,7 @@ public class HomeFragment extends BaseFragment {
                         });
                     }
                 };
-                rm.asyncTask(new PrevNextMatchTask(teamID, FixtureType.FINISHED, prevCallback));
+                rm.submitTask(new PrevNextMatchTask(teamID, FixtureType.FINISHED, prevCallback));
             } else {
                 prevFixtureContainer.setVisibility(View.GONE);
             }
@@ -219,7 +219,7 @@ public class HomeFragment extends BaseFragment {
                         });
                     }
                 };
-                rm.asyncTask(new NewsSearchTask(teamName, newsCallback, 5));
+                rm.submitTask(new NewsSearchTask(teamName, newsCallback, 5));
             } else {
                 newsContainer.setVisibility(View.GONE);
             }

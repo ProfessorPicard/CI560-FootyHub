@@ -38,7 +38,7 @@ public class RestTaskInstrumentedTest {
                 assertNotNull(message);
             }
         };
-        rpm.asyncTask(new LeagueStandingsTask(league, callback));
+        rpm.submitTask(new LeagueStandingsTask(league, callback));
     }
 
     @Test
@@ -56,7 +56,7 @@ public class RestTaskInstrumentedTest {
                 assertNotNull(message);
             }
         };
-        rpm.asyncTask(new LeagueTeamsTask(callback, league));
+        rpm.submitTask(new LeagueTeamsTask(callback, league));
     }
 
     @Test
@@ -73,7 +73,7 @@ public class RestTaskInstrumentedTest {
                 assertNotNull(message);
             }
         };
-        rpm.asyncTask(new PrevNextMatchTask(teamID, FixtureType.SCHEDULED, callback));
+        rpm.submitTask(new PrevNextMatchTask(teamID, FixtureType.SCHEDULED, callback));
     }
 
     @Test
@@ -90,7 +90,7 @@ public class RestTaskInstrumentedTest {
                 assertNotNull(message);
             }
         };
-        rpm.asyncTask(new PrevNextMatchTask(teamID, FixtureType.FINISHED, callback));
+        rpm.submitTask(new PrevNextMatchTask(teamID, FixtureType.FINISHED, callback));
     }
 
     @Test
@@ -109,7 +109,7 @@ public class RestTaskInstrumentedTest {
                 assertNotNull(message);
             }
         };
-        rpm.asyncTask(new NewsSearchTask(teamName, callback, maxResults));
+        rpm.submitTask(new NewsSearchTask(teamName, callback, maxResults));
     }
 
 }

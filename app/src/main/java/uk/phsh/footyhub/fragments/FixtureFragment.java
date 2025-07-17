@@ -120,7 +120,7 @@ public class FixtureFragment extends BaseFragment implements I_TaskCallback<Comp
         if(!_updating) {
             _updating = true;
             RestManager rm = RestManager.getInstance(requireActivity().getCacheDir());
-            rm.asyncTask(new FixturesTask(this, league, matchWeek));
+            rm.submitTask(new FixturesTask(this, league, matchWeek));
         }
     }
 
