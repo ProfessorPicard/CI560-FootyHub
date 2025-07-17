@@ -85,7 +85,7 @@ public class StandingsFragment extends BaseFragment implements I_TaskCallback<Le
     private void refreshStandings() {
         _positions.clear();
         RestManager rm = RestManager.getInstance(requireActivity().getCacheDir());
-        rm.asyncTask(new LeagueStandingsTask(_selectedLeague, this));
+        rm.submitTask(new LeagueStandingsTask(_selectedLeague, this));
     }
 
     @Override

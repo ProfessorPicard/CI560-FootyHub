@@ -1,5 +1,6 @@
 package uk.phsh.footyhub.rest.cache;
 
+import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 import okhttp3.CacheControl;
@@ -17,13 +18,15 @@ public class CacheInterceptor implements Interceptor {
      * @return Response The modified okHttp Response
      * @throws IOException IoException thrown on error
      */
+    @NotNull
     @Override
     public Response intercept(Chain chain) throws IOException {
         Response response = chain.proceed(chain.request());
 
         CacheControl cacheControl = new CacheControl.Builder()
-                .maxAge(10, TimeUnit.MINUTES)
+                .maxAge(30, TimeUnit.MINUTES)
                 .build();
+
 
         return response.newBuilder()
                 .removeHeader("Pragma")

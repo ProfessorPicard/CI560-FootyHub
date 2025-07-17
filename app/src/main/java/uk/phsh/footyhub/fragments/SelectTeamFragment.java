@@ -105,8 +105,8 @@ public class SelectTeamFragment extends BaseFragment implements I_TaskCallback<A
 
         if(teamsStr.isEmpty()) {
             RestManager rm = RestManager.getInstance(requireActivity().getCacheDir());
-            rm.asyncTask(new LeagueTeamsTask(this, LeagueEnum.PREMIER_LEAGUE));
-            rm.asyncTask(new LeagueTeamsTask(this, LeagueEnum.CHAMPIONSHIP));
+            rm.submitTask(new LeagueTeamsTask(this, LeagueEnum.PREMIER_LEAGUE));
+            rm.submitTask(new LeagueTeamsTask(this, LeagueEnum.CHAMPIONSHIP));
         } else {
             Gson gson = new Gson();
             JsonElement element = JsonParser.parseString(teamsStr);

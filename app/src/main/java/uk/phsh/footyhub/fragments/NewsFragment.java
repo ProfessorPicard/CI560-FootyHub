@@ -103,7 +103,7 @@ public class NewsFragment extends BaseFragment implements I_TaskCallback<ArrayLi
                     break;
             }
             _updatingNews = true;
-            rm.asyncTask(new NewsSearchTask(teamName, this, newsResults));
+            rm.submitTask(new NewsSearchTask(teamName, this, newsResults));
         }
     }
 

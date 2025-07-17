@@ -6,6 +6,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import java.io.File;
+import java.io.IOException;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -13,7 +14,7 @@ import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
-import java.util.concurrent.Callable;
+import java.util.function.Supplier;
 import okhttp3.Cache;
 import okhttp3.Headers;
 import okhttp3.OkHttpClient;
@@ -29,12 +30,12 @@ import uk.phsh.footyhub.rest.models.RestResponse;
  * Abstract class for creating http request tasks
  * @author Peter Blackburn
  */
-public abstract class BaseTask<T> implements Callable<RestResponse>, I_RestResponse {
+public abstract class BaseTask<T> implements I_RestResponse, Supplier<RestResponse> {
 
     public static final String baseUrl = "https://api.football-data.org/v4/";
-    private static OkHttpClient client;
     private final I_TaskCallback<T> _callback;
     private final Gson _gson;
+    private OkHttpClient client;
 
     /**
      * @return String The url of the http request
@@ -84,32 +85,30 @@ public abstract class BaseTask<T> implements Callable<RestResponse>, I_RestRespo
                 .build();
     }
 
-    /**
-     * Called when executing the http request
-     * @return RestResponse Containing the response code and the response body
-     * @throws Exception Throws an exception when something is wrong
-     */
-    public RestResponse call() throws Exception {
-
+    @Override
+    public RestResponse get() {
         Request request = new Request.Builder()
-                .url(getUrl())
-                .headers(getHeaders())
-                .build();
+            .url(getUrl())
+            .headers(getHeaders())
+            .build();
 
-        String responseStr;
+        String responseStr = "";
         int responseCode;
         try (okhttp3.Response response = client.newCall(request).execute()) {
-            assert response.body() != null;
-            responseStr = response.body().string();
-            responseCode = response.code();
-        }
+            if (response.body() != null)
+                responseStr = response.body().string();
 
+            responseCode = response.code();
+        } catch (IOException e) {
+            responseCode = -1;
+            responseStr = "Internal Error Has Occurred";
+        }
         return new RestResponse(responseStr, responseCode);
     }
 
     @Override
     public void onError(RestResponse response) {
-        _callback.onError("An error has occurred");
+        _callback.onError(response.getResponseBody());
     }
 
     @Override
